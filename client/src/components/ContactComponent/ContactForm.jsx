@@ -18,7 +18,7 @@ const ContactForm = () => {
       <div className=" container mx-auto">
         <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
           <div>
-            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2 pt-20">
+            <div className="grid grid-cols-1 mx-3 gap-2 lg:grid-cols-2 pt-20">
               <div>
                 <label className="block">
                   <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
@@ -47,7 +47,7 @@ const ContactForm = () => {
               </div>
             </div>
             <div>
-              <label className="block pt-8">
+              <label className="block pt-8 mx-3">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                  Email
                 </span>
@@ -60,7 +60,7 @@ const ContactForm = () => {
               </label>
             </div>
             <div>
-              <label className="block pt-8">
+              <label className="block pt-8 mx-3">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                   Phone Number
                 </span>
@@ -73,7 +73,7 @@ const ContactForm = () => {
               </label>
             </div>
             <div>
-              <label className="block pt-8">
+              <label className="block pt-8 mx-3">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                   Message
                 </span>
