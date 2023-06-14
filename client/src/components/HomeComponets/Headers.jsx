@@ -30,7 +30,7 @@ const Headers = () => {
             <img src={logo} alt="loading" className="w-16 h-16" />
             <Link to="/">
               <p className=" capitalize font-bold">
-                information technology society {userInfo ? "Dashboard" : ""}
+                information technology society {userInfo ? "Dashboards" : ""}
               </p>
             </Link>
           </div>
