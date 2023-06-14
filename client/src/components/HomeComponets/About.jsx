@@ -10,7 +10,7 @@ const About = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div className="col-span-2">
-            <p className="text-amber-400 text-4xl lg:text-6xl font-bold pt-3 lg:pt-16 underline">
+            <p className="text-amber-400 text-4xl lg:text-6xl font-bold pt-3 mx-3 lg:pt-16 underline">
               About Us
             </p>
             <p className="text-xl pt-5 text-white mx-4">

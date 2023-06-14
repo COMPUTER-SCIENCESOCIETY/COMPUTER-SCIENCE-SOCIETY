@@ -6,7 +6,7 @@ const Sponser = () => {
     <div className="bg-gradient-to-l from-amber-500">
       <div>
         <div className=" container mx-auto">
-          <p className="text-4xl lg:text-6xl text-orange-500 font-bold pt-4 underline underline-offset-2 pb-3">
+          <p className="text-4xl lg:text-6xl mx-4 text-orange-500 font-bold pt-4 underline underline-offset-2 pb-3">
             Want To Sponsor Us
           </p>
         </div>

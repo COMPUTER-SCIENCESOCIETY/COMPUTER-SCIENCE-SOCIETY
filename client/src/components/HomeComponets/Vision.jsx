@@ -8,7 +8,7 @@ AOS.init();
 
 const Vision = () => {
   return (
-    <div className="bg-gradient-to-l from-pink-500 ">
+    <div className="bg-gradient-to-l from-pink-500">
       <div className=" container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div data-aos="fade-right">
