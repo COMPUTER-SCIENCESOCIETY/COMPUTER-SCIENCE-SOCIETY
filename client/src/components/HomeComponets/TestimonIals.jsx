@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -8,9 +8,25 @@ import "swiper/css/free-mode";
 // import required modules
 import { FreeMode, Autoplay } from "swiper";
 
-const listUser = [0, 1, 2, 3, 4, 5, 6, 7];
+import Rating from '@mui/material/Rating';
 
 const TestimonIals = () => {
+  const [Data, setData] = useState([]);
+
+  const getInfo = async () => {
+    const infos = await fetch(
+      "https://mocki.io/v1/eb029bbb-1f15-425d-bb03-3d15f8ecf1b1"
+    );
+    const res = await infos.json();
+    setData(res);
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  console.log(Data);
+
   return (
     <div className="bg-gradient-to-b from-indigo-500">
       <div className="container mx-auto">
@@ -53,27 +69,41 @@ const TestimonIals = () => {
               },
             }}
           >
-            {listUser.map((data) => {
+            {Data.map((data) => {
               return (
                 <SwiperSlide>
-                  <div
-                    className="relative h-[400px] w-[300px] rounded-md"
-                    key={data.id}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHVzZXJ8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
-                      alt="AirMax Pro"
-                      className="z-0 h-full w-full rounded-md object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 text-left">
-                      <h1 className="text-lg font-semibold text-white">
-                        Delba
-                      </h1>
-                      <p className="mt-2 text-sm text-gray-300">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Excepturi, debitis?
-                      </p>
+                  <div className="mx-auto max-w-xl rounded-md bg-black p-1">
+                    <div className="flex flex-col rounded-md bg-white h-96">
+                      <div className="flex flex-1 flex-col justify-between p-8">
+                        <div className="mb-4 flex space-x-2">
+                        <Rating name="size-large" defaultValue={data.Rating} size="large" />
+                        </div>
+                        <div className="flex-1 pt-2">
+                          <blockquote>
+                            <p className="text-lg font-semibold text-gray-800">
+                              “{data.About}”
+                            </p>
+                          </blockquote>
+                        </div>
+
+                        <div className="mt-8 border-t border-gray-300 pt-4 dark:border-gray-800">
+                          <div className="flex items-center">
+                            <img
+                              className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
+                              src={data.Image}
+                              alt=""
+                            />
+                            <div className="ml-3 min-w-0">
+                              <p className="truncate text-base font-semibold text-gray-800">
+                                {data.Name}
+                              </p>
+                              <p className="truncate text-base text-gray-500">
+                               {data.Type}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>
