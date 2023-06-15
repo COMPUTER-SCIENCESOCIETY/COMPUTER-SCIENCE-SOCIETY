@@ -1,5 +1,5 @@
 import React from "react";
-import Gallery from "react-photo-gallery";
+
 import { photos } from "./Photo";
 import { Helmet } from "react-helmet-async";
 
@@ -16,7 +16,7 @@ const GalleryImage = () => {
         <div>
             <p className="text-2xl font-semibold pt-2 pb-2">ITS Gallery</p>
         </div>
-      <Gallery photos={photos} />
+    
     </div>
   );
 };

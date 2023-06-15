@@ -10,6 +10,8 @@ import { Pagination } from "swiper";
 import { useSelector } from "react-redux";
 import EventModel from "./EventModel";
 import axios from "axios";
+import TableEvent from "./TableEvent";
+import { format } from "timeago.js";
 
 const UpcomingEvent = () => {
   const [data, setData] = React.useState([]);
@@ -68,9 +70,9 @@ const UpcomingEvent = () => {
         }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-          {data.map((item) => (
+          {data.slice(0,5).map((item,index) => (
             <SwiperSlide>
-              <div className={`${item.formopendate > currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
+              <div key={index} className={`${item.formopendate > currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
                 <p className="m-5 pt-5 text-8xl text-white">
                   {item.date.slice(8, 10)}
                 </p>
@@ -78,7 +80,7 @@ const UpcomingEvent = () => {
                 <div className="m-5 mt-8">
                   <p className="text-xl text-white">{item.title}</p>
                   <pre className="text-xl text-white pt-2">
-                    {item.timefrom} - {item.timeend}
+                    {format(item.timeend)}
                   </pre>
                 </div>
                 {currentDate === item.date ? <button className="bg-red-400 w-32 mx-4 rounded-2xl">Done</button> : currentDate <= item.formopendate ?
@@ -97,6 +99,8 @@ const UpcomingEvent = () => {
         ) : (
           ""
         )}
+
+        <TableEvent/>
       </div>
     </>
   );
