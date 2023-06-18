@@ -18,7 +18,6 @@ const GalleryImage = () => {
     getInfo();
   }, []);
 
-  console.log(Data);
 
   return (
     <div className="container mx-auto pb-14">
