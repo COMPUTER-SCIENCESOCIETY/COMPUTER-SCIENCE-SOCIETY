@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const GalleryImage = () => {
-  const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${
-    import.meta.env.VITE_SOME_KEY
-  }`;
+
+  const secert = import.meta.env.VITE_SOME_KEY
+  const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${secert}`;
 
   const [Data, setData] = useState([]);
 
