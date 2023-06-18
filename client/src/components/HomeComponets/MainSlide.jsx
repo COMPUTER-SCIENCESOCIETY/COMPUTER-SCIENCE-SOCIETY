@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/itsl.png";
-
+import './MainSlide.css'
 const MainSlide = () => {
   return (
     <div>
@@ -20,7 +20,7 @@ const MainSlide = () => {
           <img src={logo} alt="loading" className="w-48 h-48 lg:w-96 lg:h-96" />
         </div>
         <div>
-          <p className="text-3xl lg:text-5xl text-center text-white font-bold uppercase pb-10">
+          <p className="text-3xl lg:text-5xl text-center text-white font-bold uppercase pb-10 tracking-in-expand">
             Welcome to Information technology Society
           </p>
           <p className="text-3xl lg:text-5xl text-center text-white font-bold pb-10">
