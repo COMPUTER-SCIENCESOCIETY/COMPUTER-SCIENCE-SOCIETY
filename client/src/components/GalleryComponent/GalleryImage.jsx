@@ -31,7 +31,7 @@ const GalleryImage = () => {
       <div>
         <p className="text-2xl font-semibold pt-2 pb-2">ITS Gallery</p>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {Data.map((item) => (
             <div className="mx-auto w-[300px] rounded-md border border-black">
               {item.media_type === "VIDEO" ? (
@@ -76,7 +76,7 @@ const GalleryImage = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
