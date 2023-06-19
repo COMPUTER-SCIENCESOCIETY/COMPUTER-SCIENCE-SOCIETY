@@ -29,7 +29,7 @@ const GalleryImage = () => {
         <meta property="og:title" content="ITS Society Teams Member" />
       </Helmet>
       <div>
-        <p className="text-2xl font-semibold pt-2 pb-2">ITS Gallery</p>
+        <p className="text-2xl font-semibold pt-2 pb-2">ITS Gallerys</p>
 
         {/* <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {Data.map((item) => (
