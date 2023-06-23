@@ -22,8 +22,6 @@ export function LoginScreen() {
     }
   }, [navigate, userInfo]);
 
-
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -95,10 +93,8 @@ export function LoginScreen() {
                   onClick={submitHandler}
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
-                  {
-                    isLoading ? "loading..":<p>Get started</p>
-                  }
-                 
+                  {isLoading ? "SignIn Wait ..." : <p>Get started</p>}
+
                   {/* <ArrowRight className="ml-2" size={16} /> */}
                 </button>
               </div>

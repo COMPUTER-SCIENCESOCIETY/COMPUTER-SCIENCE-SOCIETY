@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlices";
 import { useLogoutMutation } from "../../slices/userApiSlice";
-import { Helmet } from "react-helmet-async";
+
 
 const Headers = () => {
   const { userInfo } = useSelector((state) => state.auth);
