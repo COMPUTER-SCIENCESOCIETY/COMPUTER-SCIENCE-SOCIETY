@@ -1,7 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
-export default function EventModel() {
+
+export default function EventModel({mutate}) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -61,12 +63,21 @@ const addinpdata = async (e) => {
         alert("error");
         console.log("error");
     } else {
-      window.location.reload();
-        console.log("data added");
+      mutate()
+      setIsOpen(false);
+      toast.success(`${inpval.title}`,{
+        icon: '👌',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      })
     }
 }
   return (
     <>
+    <Toaster/>
       <div className="mt-10">
         <button
           type="button"

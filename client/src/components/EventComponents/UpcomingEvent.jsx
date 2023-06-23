@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import useSWR from 'swr'
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,23 +9,22 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import { useSelector } from "react-redux";
 import EventModel from "./EventModel";
-import axios from "axios";
 import TableEvent from "./TableEvent";
 import { format } from "timeago.js";
 
 const UpcomingEvent = () => {
-  const [data, setData] = React.useState([]);
-  const [Loading, setLoading] = React.useState(false);
+
   const { userInfo } = useSelector((state) => state.auth);
 
-  const getEvents = async () => {
-    const res = await axios.get("/api/eventpage/getallevent");
-    setData(res.data.events);
-  };
+  const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-  useEffect(() => {
-    getEvents();
-  }, []);
+
+  const { data,mutate, error, isLoading } = useSWR('/api/eventpage/getallevent', fetcher)
+ 
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
+
+
 
   const d = new Date();
 
@@ -70,7 +69,7 @@ const UpcomingEvent = () => {
         }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-          {data.slice(0,5).map((item,index) => (
+          {data.events.slice(0,5).map((item,index) => (
             <SwiperSlide>
               <div key={index} className={`${item.formopendate > currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
                 <p className="m-5 pt-5 text-8xl text-white">
@@ -94,7 +93,7 @@ const UpcomingEvent = () => {
       <div>
         {userInfo ? (
           <>
-            <EventModel />
+            <EventModel mutate={mutate}/>
           </>
         ) : (
           ""
