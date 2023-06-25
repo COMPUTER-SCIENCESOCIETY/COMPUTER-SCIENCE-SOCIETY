@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import useSWR from 'swr'
+import useSWR from "swr";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,17 +13,17 @@ import TableEvent from "./TableEvent";
 import { format } from "timeago.js";
 
 const UpcomingEvent = () => {
-
   const { userInfo } = useSelector((state) => state.auth);
 
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
+  const { data, mutate, error, isLoading } = useSWR(
+    "/api/eventpage/getallevent",
+    fetcher
+  );
 
-  const { data,mutate, error, isLoading } = useSWR('/api/eventpage/getallevent', fetcher)
- 
-  if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
-
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
 
   const d = new Date();
@@ -69,22 +69,44 @@ const UpcomingEvent = () => {
         }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-          {data.events.slice(0,5).map((item,index) => (
+          {data.events.slice(0, 5).map((item, index) => (
             <SwiperSlide>
-              <div key={index} className={`${item.formopendate > currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
-                <p className="m-5 pt-5 text-8xl text-white">
-                  {item.date.slice(8, 10)}
-                </p>
-                <p className="m-5 text-2xl text-white">{months.format(d)}</p>
+              <div
+                key={index}
+                className={`${
+                  item.formopendate >= currentDate
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl"
+                    : "bg-blue-200 h-96 rounded-xl"
+                }`}
+              >
+         
+                  <div>
+                    <p className="m-5 pt-5 text-8xl text-white">
+                      {item.date.slice(8, 10)}
+                    </p>
+                  </div>
+          
+
+                <p className="m-5 text-2xl text-white">{item.month}</p>
                 <div className="m-5 mt-8">
                   <p className="text-xl text-white">{item.title}</p>
                   <pre className="text-xl text-white pt-2">
                     {format(item.timeend)}
                   </pre>
                 </div>
-                {currentDate === item.date ? <button className="bg-red-400 w-32 mx-4 rounded-2xl">Done</button> : currentDate <= item.formopendate ?
-                 <button className="bg-lime-400 w-32 mx-4 rounded-2xl">Apply</button>: <button className="bg-amber-500 w-32 mx-4 rounded-2xl">OVER</button>}
-                
+                {currentDate === item.date ? (
+                  <button className="bg-red-400 w-32 mx-4 rounded-2xl">
+                    Done
+                  </button>
+                ) : currentDate <= item.formopendate ? (
+                  <button className="bg-lime-400 w-32 mx-4 rounded-2xl">
+                    Apply
+                  </button>
+                ) : (
+                  <button className="bg-amber-500 w-32 mx-4 rounded-2xl">
+                    OVER
+                  </button>
+                )}
               </div>
             </SwiperSlide>
           ))}
@@ -93,13 +115,13 @@ const UpcomingEvent = () => {
       <div>
         {userInfo ? (
           <>
-            <EventModel mutate={mutate}/>
+            <EventModel mutate={mutate} />
           </>
         ) : (
           ""
         )}
 
-        <TableEvent/>
+        <TableEvent />
       </div>
     </>
   );
