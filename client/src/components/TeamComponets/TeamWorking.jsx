@@ -3,6 +3,7 @@ import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
+import UpdateMember from "./UpdateTeam/UpdateMember";
 
 
 const TeamWorking = () => {
@@ -49,7 +50,8 @@ const TeamWorking = () => {
                         {item.NAME}
                       </h3>
                       {userInfo ? (
-                        <PencilSquareIcon className="h-6 w-6 text-blue-500 cursor-pointer" />
+                        <UpdateMember item={item}/>
+                       
                       ) : (
                         ""
                       )}
