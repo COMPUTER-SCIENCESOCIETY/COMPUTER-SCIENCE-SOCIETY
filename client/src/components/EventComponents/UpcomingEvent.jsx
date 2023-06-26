@@ -71,6 +71,12 @@ const UpcomingEvent = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
           {data.events.slice(0, 5).map((item, index) => (
             <SwiperSlide>
+              <div key={index} className={`${item.formopendate >= currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
+                <p className="m-5 pt-5 text-8xl text-white">
+                  {item.date.slice(8, 10)}
+                </p>
+                <p className="m-5 text-2xl text-white">{months.format(d)}</p>
+
               <div
                 key={index}
                 className={`${

@@ -1,7 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import Tooltip from "@mui/material/Tooltip";
+import { Divider } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
 export default function EventModel({ mutate }) {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -13,12 +17,20 @@ export default function EventModel({ mutate }) {
     setIsOpen(true);
   }
 
+  const d = new Date();
+
+  const months = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+  });
+
   const [inpval, setinpval] = useState({
     title: "",
     date: "",
     formopendate: "",
     month: "",
     timefrom: "",
+    image:"",
+
     timeend: "",
   });
 
@@ -34,7 +46,6 @@ export default function EventModel({ mutate }) {
 
   const addinpdata = async (e) => {
     e.preventDefault();
-
     const { title, date, formopendate, month, timefrom, timeend } = inpval;
 
     const res = await fetch("/api/eventpage/createevent", {
@@ -47,6 +58,8 @@ export default function EventModel({ mutate }) {
         date,
         formopendate,
         month,
+
+        image,
         timefrom,
         timeend,
       }),
@@ -71,6 +84,7 @@ export default function EventModel({ mutate }) {
       });
     }
   };
+
 
 
   //Show Month Name in Select Html Tags
@@ -134,6 +148,7 @@ export default function EventModel({ mutate }) {
                   >
                     Create Event
                   </Dialog.Title>
+                  <Divider/>
                   <div className="mt-2">
                     <div>
                       <label className="block">
@@ -188,6 +203,11 @@ export default function EventModel({ mutate }) {
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                           Month
                         </span>
+                        <input
+                          type="date"
+                          onChange={setdata}
+                          value={inpval.date}
+                          name="date"
                         <select
                           onChange={setdata}
                           value={inpval.month}
@@ -207,6 +227,14 @@ export default function EventModel({ mutate }) {
                     <div>
                       <label className="block mt-5">
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+
+                          Form Submit End Date
+                        </span>
+                        <input
+                          type="date"
+                          onChange={setdata}
+                          value={inpval.formopendate}
+                          name="formopendate"
                           Time From
                         </span>
                         <input
@@ -223,6 +251,67 @@ export default function EventModel({ mutate }) {
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                           Time End
                         </span>
+                        <select
+                          onChange={setdata}
+                          value={inpval.month}
+                          name="month"
+                          className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                        >
+                          <option></option>
+                          <option value={months.format(d)}>
+                            {months.format(d)}
+                          </option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="">
+                    <label className="block mt-5">
+                      <span className="after:content-['*'] after:ml-0.5 flex justify-start after:text-red-500 text-sm font-medium text-slate-700">
+                        Time Event Start
+                        <Tooltip title="Date must be same as you put in the Event Date,Time can be change as you want.">
+                          <InformationCircleIcon className=" mx-5 h-5 w-5 text-slate-500" />
+                        </Tooltip>
+                      </span>
+                      <input
+                        type="datetime-local"
+                        onChange={setdata}
+                        value={inpval.timefrom}
+                        name="timefrom"
+                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                      />
+                    </label>
+                    <label className="block mt-5">
+                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 flex justify-start text-sm font-medium text-slate-700">
+                        Time For Form End 
+                        <Tooltip title="Date must be same as you put in the Form Submit End Date,Time can be change as you want.Time must be Form End at That Time">
+                          <InformationCircleIcon className=" mx-2 h-5 w-5 text-slate-500" />
+                        </Tooltip>
+                      </span>
+                      <input
+                        type="datetime-local"
+                        onChange={setdata}
+                        value={inpval.timeend}
+                        name="timeend"
+                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                      />
+                    </label>
+                    <label className="block mt-5">
+                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 flex justify-start text-sm font-medium text-slate-700">
+                        Image Url
+                        <Tooltip title="Image Url Must be Paste">
+                          <InformationCircleIcon className=" mx-2 h-5 w-5 text-slate-500" />
+                        </Tooltip>
+                      </span>
+                      <input
+                        type="text"
+                        onChange={setdata}
+                        value={inpval.image}
+                        name="image"
+                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                      />
+                    </label>
+                  </div>
                         <input
                           type="datetime-local"
                           onChange={setdata}

@@ -3,7 +3,7 @@ import Event from "../models/EventModel.js";
 const createEvent = async (req, res) => {
 
   try {
-    const { title, date,formopendate, month, timefrom, timeend } = req.body;
+    const { title, date,formopendate, month,image, timefrom, timeend } = req.body;
     if (!title || !date || !month) {
       return res.status(402).json({ error: "Plz add all the fields" });
     }
@@ -15,6 +15,7 @@ const createEvent = async (req, res) => {
       month,
       timefrom,
       timeend,
+      image,
       postedBy:req.user.id
     });
     event.save()
