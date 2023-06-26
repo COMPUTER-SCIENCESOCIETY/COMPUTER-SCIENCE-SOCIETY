@@ -3,7 +3,7 @@ import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import { Fragment, useState } from "react";
 
 export default function UpdateMember({ item }) {
-  console.log(item);
+  
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {

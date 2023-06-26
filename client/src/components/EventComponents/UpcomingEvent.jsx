@@ -114,6 +114,7 @@ const UpcomingEvent = () => {
                   </button>
                 )}
               </div>
+              </div>
             </SwiperSlide>
           ))}
         </div>

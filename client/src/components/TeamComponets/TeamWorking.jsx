@@ -5,7 +5,6 @@ import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
 import UpdateMember from "./UpdateTeam/UpdateMember";
 
-
 const TeamWorking = () => {
   const [Data, setData] = useState([]);
 
@@ -33,9 +32,12 @@ const TeamWorking = () => {
           </div>
           <hr />
           <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {Data.map((item) => (
+            {Data.map((item, index) => (
               <>
-                <div className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300">
+                <div
+                  className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300"
+                  key={index}
+                >
                   <img
                     src={item.image}
                     alt="loading"
@@ -49,12 +51,7 @@ const TeamWorking = () => {
                       <h3 className="text-xl font-semibold text-black">
                         {item.NAME}
                       </h3>
-                      {userInfo ? (
-                        <UpdateMember item={item}/>
-                       
-                      ) : (
-                        ""
-                      )}
+                      {userInfo ? <UpdateMember item={item} /> : ""}
                     </div>
 
                     <p className="mt-3 text-base text-gray-600">
