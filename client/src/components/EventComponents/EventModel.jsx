@@ -1,9 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import Tooltip from "@mui/material/Tooltip";
+import { Divider } from "@mui/material";
 
-
-export default function EventModel({mutate}) {
+export default function EventModel({ mutate }) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -20,64 +22,69 @@ export default function EventModel({mutate}) {
     month: "long",
   });
 
-  
   const [inpval, setinpval] = useState({
     title: "",
     date: "",
-    formopendate:"",
+    formopendate: "",
     month: "",
     timefrom: "",
-    timeend: ""
-})
+    image:"",
+    timeend: "",
+  });
 
-const setdata = (e) => {
+  const setdata = (e) => {
     const { name, value } = e.target;
     setinpval((preval) => {
-        return {
-            ...preval,
-            [name]: value
-        }
-    })
-}
+      return {
+        ...preval,
+        [name]: value,
+      };
+    });
+  };
 
-
-const addinpdata = async (e) => {
+  const addinpdata = async (e) => {
     e.preventDefault();
 
-    const { title, date,formopendate, month, timefrom, timeend} = inpval
+    const { title, date, formopendate, month,image, timefrom, timeend } = inpval;
 
     const res = await fetch("/api/eventpage/createevent", {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          title, date,formopendate, month, timefrom, timeend
-        })
-    })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        date,
+        formopendate,
+        month,
+        image,
+        timefrom,
+        timeend,
+      }),
+    });
 
     const data = await res.json();
     // console.log(data);
 
     if (res.status === 422 || !data) {
-        alert("error");
-        console.log("error");
+      alert("error");
+      console.log("error");
     } else {
-      mutate()
+      mutate();
       setIsOpen(false);
-      toast.success(`${inpval.title}`,{
-        icon: '👌',
+      toast.success(`${inpval.title}`, {
+        icon: "👌",
         style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
         },
-      })
+      });
     }
-}
+  };
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <div className="mt-10">
         <button
           type="button"
@@ -120,6 +127,7 @@ const addinpdata = async (e) => {
                   >
                     Create Event
                   </Dialog.Title>
+                  <Divider/>
                   <div className="mt-2">
                     <div>
                       <label className="block">
@@ -128,7 +136,9 @@ const addinpdata = async (e) => {
                         </span>
                         <input
                           type="text"
-                          onChange={setdata} value={inpval.title} name='title'
+                          onChange={setdata}
+                          value={inpval.title}
+                          name="title"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                           placeholder="Enter your Tilte"
                         />
@@ -142,7 +152,9 @@ const addinpdata = async (e) => {
                         </span>
                         <input
                           type="date"
-                          onChange={setdata} value={inpval.date} name='date'
+                          onChange={setdata}
+                          value={inpval.date}
+                          name="date"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                           placeholder="Enter your Tilte"
                         />
@@ -151,11 +163,13 @@ const addinpdata = async (e) => {
                     <div>
                       <label className="block mt-4">
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                         Form End Date
+                          Form Submit End Date
                         </span>
                         <input
                           type="date"
-                          onChange={setdata} value={inpval.formopendate} name='formopendate'
+                          onChange={setdata}
+                          value={inpval.formopendate}
+                          name="formopendate"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                           placeholder="Enter your Tilte"
                         />
@@ -167,8 +181,11 @@ const addinpdata = async (e) => {
                           Month
                         </span>
                         <select
-                          onChange={setdata} value={inpval.month} name='month'
-                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
+                          onChange={setdata}
+                          value={inpval.month}
+                          name="month"
+                          className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                        >
                           <option></option>
                           <option value={months.format(d)}>
                             {months.format(d)}
@@ -179,22 +196,47 @@ const addinpdata = async (e) => {
                   </div>
                   <div className="">
                     <label className="block mt-5">
-                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                        Time From
+                      <span className="after:content-['*'] after:ml-0.5 flex justify-start after:text-red-500 text-sm font-medium text-slate-700">
+                        Time Event Start
+                        <Tooltip title="Date must be same as you put in the Event Date,Time can be change as you want.">
+                          <InformationCircleIcon className=" mx-5 h-5 w-5 text-slate-500" />
+                        </Tooltip>
                       </span>
                       <input
                         type="datetime-local"
-                        onChange={setdata} value={inpval.timefrom} name='timefrom'
+                        onChange={setdata}
+                        value={inpval.timefrom}
+                        name="timefrom"
                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                       />
                     </label>
                     <label className="block mt-5">
-                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                        Time End
+                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 flex justify-start text-sm font-medium text-slate-700">
+                        Time For Form End 
+                        <Tooltip title="Date must be same as you put in the Form Submit End Date,Time can be change as you want.Time must be Form End at That Time">
+                          <InformationCircleIcon className=" mx-2 h-5 w-5 text-slate-500" />
+                        </Tooltip>
                       </span>
                       <input
-                       type="datetime-local"
-                        onChange={setdata} value={inpval.timeend} name='timeend'
+                        type="datetime-local"
+                        onChange={setdata}
+                        value={inpval.timeend}
+                        name="timeend"
+                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                      />
+                    </label>
+                    <label className="block mt-5">
+                      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 flex justify-start text-sm font-medium text-slate-700">
+                        Image Url
+                        <Tooltip title="Image Url Must be Paste">
+                          <InformationCircleIcon className=" mx-2 h-5 w-5 text-slate-500" />
+                        </Tooltip>
+                      </span>
+                      <input
+                        type="text"
+                        onChange={setdata}
+                        value={inpval.image}
+                        name="image"
                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                       />
                     </label>
