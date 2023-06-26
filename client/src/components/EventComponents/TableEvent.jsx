@@ -37,6 +37,12 @@ const TableEvent = () => {
                     scope="col"
                     className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
                   >
+                    Image
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                  >
                     Title
                   </th>
 
@@ -69,6 +75,11 @@ const TableEvent = () => {
                     <td className="whitespace-nowrap px-12 text-left text-sm font-medium">
                       <div className="text-sm text-gray-900 ">
                         {index+1}
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-12 py-4">
+                      <div className="text-sm text-gray-900 ">
+                        <img src={person.image} alt="loading" className="w-32 h-32 rounded-xl"/>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-12 py-4">

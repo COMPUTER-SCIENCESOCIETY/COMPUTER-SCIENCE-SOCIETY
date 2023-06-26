@@ -4,7 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import Tooltip from "@mui/material/Tooltip";
 import { Divider } from "@mui/material";
-
+import { Fragment, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 export default function EventModel({ mutate }) {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -29,6 +30,7 @@ export default function EventModel({ mutate }) {
     month: "",
     timefrom: "",
     image:"",
+
     timeend: "",
   });
 
@@ -44,8 +46,7 @@ export default function EventModel({ mutate }) {
 
   const addinpdata = async (e) => {
     e.preventDefault();
-
-    const { title, date, formopendate, month,image, timefrom, timeend } = inpval;
+    const { title, date, formopendate, month, timefrom, timeend } = inpval;
 
     const res = await fetch("/api/eventpage/createevent", {
       method: "POST",
@@ -57,6 +58,7 @@ export default function EventModel({ mutate }) {
         date,
         formopendate,
         month,
+
         image,
         timefrom,
         timeend,
@@ -64,9 +66,9 @@ export default function EventModel({ mutate }) {
     });
 
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
 
-    if (res.status === 422 || !data) {
+    if (res.status === 402 || !data) {
       alert("error");
       console.log("error");
     } else {
@@ -82,6 +84,25 @@ export default function EventModel({ mutate }) {
       });
     }
   };
+
+
+
+  //Show Month Name in Select Html Tags
+  const [Data, setData] = useState([]);
+
+  const getInfo = async () => {
+    const infos = await fetch(
+      "https://mocki.io/v1/a86a3986-269c-48a6-ad0f-bb436e4c22cc"
+    );
+    const res = await infos.json();
+    setData(res);
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+
   return (
     <>
       <Toaster />
@@ -120,7 +141,7 @@ export default function EventModel({ mutate }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md lg:max-w-7xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -144,25 +165,69 @@ export default function EventModel({ mutate }) {
                         />
                       </label>
                     </div>
+                    <div className="grid grid-cols-2">
+                      <div>
+                        <label className="block mt-4">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Event Date
+                          </span>
+                          <input
+                            type="date"
+                            onChange={setdata}
+                            value={inpval.date}
+                            name="date"
+                            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="Enter your Tilte"
+                          />
+                        </label>
+                      </div>
+                      <div>
+                        <label className="block mt-4 ml-5">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Form End Date
+                          </span>
+                          <input
+                            type="date"
+                            onChange={setdata}
+                            value={inpval.formopendate}
+                            name="formopendate"
+                            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="Enter your Tilte"
+                          />
+                        </label>
+                      </div>
+                    </div>
 
                     <div>
                       <label className="block mt-4">
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                          Event Date
+                          Month
                         </span>
                         <input
                           type="date"
                           onChange={setdata}
                           value={inpval.date}
                           name="date"
+                        <select
+                          onChange={setdata}
+                          value={inpval.month}
+                          name="month"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                          placeholder="Enter your Tilte"
-                        />
+                        >
+                          {Data.map((months) => (
+                            <>
+                              <option value={months.name}>{months.name}</option>
+                            </>
+                          ))}
+                        </select>
                       </label>
                     </div>
+                  </div>
+                  <div className="grid grid-cols-2">
                     <div>
-                      <label className="block mt-4">
+                      <label className="block mt-5">
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+
                           Form Submit End Date
                         </span>
                         <input
@@ -170,15 +235,21 @@ export default function EventModel({ mutate }) {
                           onChange={setdata}
                           value={inpval.formopendate}
                           name="formopendate"
+                          Time From
+                        </span>
+                        <input
+                          type="datetime-local"
+                          onChange={setdata}
+                          value={inpval.timefrom}
+                          name="timefrom"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                          placeholder="Enter your Tilte"
                         />
                       </label>
                     </div>
-                    <div>
-                      <label className="block mt-4">
+                    <div className="ml-5">
+                      <label className="block mt-5">
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                          Month
+                          Time End
                         </span>
                         <select
                           onChange={setdata}
@@ -240,6 +311,16 @@ export default function EventModel({ mutate }) {
                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                       />
                     </label>
+                  </div>
+                        <input
+                          type="datetime-local"
+                          onChange={setdata}
+                          value={inpval.timeend}
+                          name="timeend"
+                          className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                        />
+                      </label>
+                    </div>
                   </div>
 
                   <div className="mt-4 flex justify-center">
