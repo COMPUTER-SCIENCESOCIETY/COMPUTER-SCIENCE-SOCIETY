@@ -17,9 +17,9 @@ const SPORTSMEMBER = () => {
     <div className="mb-10">
       {Loading ? (
         <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((item) => (
+          {data.map((item,index) => (
             <>
-              <div className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300">
+              <div className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300" key={index}>
                 <img
                   src={item.image}
                   alt="loading"
