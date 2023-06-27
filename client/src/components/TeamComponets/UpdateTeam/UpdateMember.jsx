@@ -1,4 +1,3 @@
-
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar-edit";
