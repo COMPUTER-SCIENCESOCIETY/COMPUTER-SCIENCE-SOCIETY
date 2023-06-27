@@ -3,8 +3,8 @@ import Event from "../models/EventModel.js";
 const createEvent = async (req, res) => {
 
   try {
-    const { title, date,formopendate, month,image, timefrom, timeend } = req.body;
-    if (!title || !date || !month) {
+    const { title, date,formopendate, month,image,googleform, timefrom, timeend } = req.body;
+    if (!title || !date || !month || !googleform) {
       return res.status(402).json({ error: "Plz add all the fields" });
     }
 
@@ -16,6 +16,7 @@ const createEvent = async (req, res) => {
       timefrom,
       timeend,
       image,
+      googleform,
       postedBy:req.user.id
     });
     event.save()

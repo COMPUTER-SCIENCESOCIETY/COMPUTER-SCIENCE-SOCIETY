@@ -29,6 +29,10 @@ const EventSchema = mongoose.Schema(
     image:{
       type: String,
     },
+    googleform:{
+      type: String,
+      required: true,
+    },
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
