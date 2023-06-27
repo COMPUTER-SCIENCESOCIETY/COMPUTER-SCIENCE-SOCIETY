@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import axios from "axios";
+import useSWR from "swr";
 import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
 import UpdateMember from "./UpdateTeam/UpdateMember";
@@ -12,11 +12,22 @@ const TeamWorking = () => {
 
   //heade of society members
 
-  React.useEffect(() => {
-    axios.get("/api/creativemember/getheadmember").then((response) => {
-      setData(response.data.post);
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   axios.get("/api/creativemember/getheadmember").then((response) => {
+  //     setData(response.data.post);
+  //   });
+  // }, []);
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  const { data, mutate, error, isLoading } = useSWR(
+    "/api/creativemember/getheadmember",
+    fetcher
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+
 
   return (
     <div className="mt-5">
@@ -32,7 +43,7 @@ const TeamWorking = () => {
           </div>
           <hr />
           <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {Data.map((item, index) => (
+            {data.post.map((item, index) => (
               <>
                 <div
                   className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300"
@@ -51,7 +62,7 @@ const TeamWorking = () => {
                       <h3 className="text-xl font-semibold text-black">
                         {item.NAME}
                       </h3>
-                      {userInfo ? <UpdateMember item={item} /> : ""}
+                      {userInfo ? <UpdateMember item={item} mutate={mutate} /> : ""}
                     </div>
 
                     <p className="mt-3 text-base text-gray-600">

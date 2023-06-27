@@ -1,9 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { Fragment, useState } from "react";
+import Avatar from "react-avatar-edit";
+import React,{ Fragment, useState } from "react";
 
-export default function UpdateMember({ item }) {
-  
+export default function UpdateMember({ item,mutate }) {
+  console.log(item);
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -13,6 +14,69 @@ export default function UpdateMember({ item }) {
   function openModal() {
     setIsOpen(true);
   }
+
+  const [src, setSrc] = useState();
+  const [preview, setPreview] = useState();
+
+  const onClose = () => {
+    setPreview(null);
+  };
+
+  const onCrop = (view) => {
+    setPreview(view);
+  };
+
+  //   const onBeforeFileLoad =(elem)=>{
+  //     if (elem.target.files[0].size > 71680) {
+  //         alert("File is too big!");
+  //         elem.target.value = "";
+  //       }
+  // }
+
+  const [datas, setDatas] = React.useState({
+    NAME: item.NAME,
+    POST: item.POST,
+    YEAR: item.YEAR,
+    image: item.image
+})
+
+
+  const setdata = (e) => {
+    const { name, value } = e.target;
+    setDatas((preval) => {
+        return {
+            ...preval,
+            [name]: value
+        }
+    })
+}
+
+const postUpdated = async (updateId) => {
+
+    const { NAME, POST, YEAR,image } = datas;
+
+    const res2 = await fetch(`/api/creativemember/headsocietyup/${updateId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            NAME, POST, YEAR,image:preview
+        })
+    })
+
+    const data2 = await res2.json();
+    // console.log(data2);
+
+    if (res2.status === 422 || !data2) {
+        alert("fill the data")
+    } else {
+        alert("Data updated successfully");
+      
+    }
+    mutate()
+}
+
 
   return (
     <>
@@ -53,12 +117,32 @@ export default function UpdateMember({ item }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                   Profile Update
+                    Profile Update
                   </Dialog.Title>
                   <div className="mt-2">
-                    <div className="mt-2 flex justify-center pb-3">
-                        <img src={item.image} className="h-48 w-48 rounded-full"/>
-                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        {preview ? (
+                          preview && (
+                            <img
+                              src={preview}
+                              className="h-48 w-48 rounded-full"
+                            />
+                          )
+                        ) : (
+                          <img src={item.image} className="h-48 w-48 rounded-full"/>
+                        )}
+                      </div>
+                      <div>
+                        <Avatar
+                          width={200}
+                          height={200}
+                          onCrop={onCrop}
+                          onClose={onClose}
+                          src={src}
+                        />
+                      </div>
+                    </div>           
                     <div>
                       <label
                         htmlFor=""
@@ -71,8 +155,10 @@ export default function UpdateMember({ item }) {
                         <input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
-                          placeholder="Name"
-                          defaultValue={item.NAME}
+                          onChange={setdata}
+                          name='NAME'
+                          value={datas.NAME}
+                         
                         ></input>
                       </div>
                     </div>
@@ -88,8 +174,9 @@ export default function UpdateMember({ item }) {
                         <input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
-                          placeholder="Name"
-                          defaultValue={item.POST}
+                          onChange={setdata}
+                          name='POST'
+                          value={datas.POST}
                         ></input>
                       </div>
                     </div>
@@ -105,8 +192,9 @@ export default function UpdateMember({ item }) {
                         <input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
-                          placeholder="Name"
-                          defaultValue={item.YEAR}
+                          name='YEAR'
+                          value={datas.YEAR}
+
                         ></input>
                       </div>
                     </div>
@@ -114,11 +202,10 @@ export default function UpdateMember({ item }) {
 
                   <div className="mt-4 flex justify-center">
                     <button
-                      type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      onClick={() => postUpdated(item._id)}
                     >
-                      Got it, thanks!
+                      Submit
                     </button>
                   </div>
                 </Dialog.Panel>

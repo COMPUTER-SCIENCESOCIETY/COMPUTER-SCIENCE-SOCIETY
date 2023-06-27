@@ -5,7 +5,6 @@ import headsoceity from "../models/headsociety.js";
 import sponsers from "../models/sponserModel.js";
 import sportmembers from "../models/sportModel.js";
 
-
 const getHeadUser = async (req, res) => {
   headsoceity
     .find()
@@ -84,6 +83,82 @@ const getSportUser = async (req, res) => {
     });
 };
 
+const headUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await headsoceity.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
+const creativeUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await creatativemembers.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
+const eventCodinatorUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await eventcodinator.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
+const TechnicalUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await techincalmembers.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
+const sponserUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await sponsers.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
+const sportUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await sportmembers.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
 export {
   getHeadUser,
   getallposts,
@@ -91,4 +166,10 @@ export {
   getTechnicalUser,
   getSponserUser,
   getSportUser,
+  headUpdate,
+  creativeUpdate,
+  eventCodinatorUpdate,
+  TechnicalUpdate,
+  sponserUpdate,
+  sportUpdate,
 };

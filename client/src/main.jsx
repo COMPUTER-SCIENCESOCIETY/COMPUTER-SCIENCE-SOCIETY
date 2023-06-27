@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -17,6 +17,7 @@ import { LoginScreen } from "./pages/Auth/LoginScreen.jsx";
 import EventWorking from "./pages/Event/EventWorking.jsx";
 import { HelmetProvider } from "react-helmet-async";
 import GalleryImage from "./components/GalleryComponent/GalleryImage.jsx";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
