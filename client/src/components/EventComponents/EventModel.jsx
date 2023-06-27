@@ -20,6 +20,8 @@ export default function EventModel({ mutate }) {
     month: "",
     timefrom: "",
     timeend: "",
+    image: "",
+    googleform: "",
   });
 
   const setdata = (e) => {
@@ -35,7 +37,16 @@ export default function EventModel({ mutate }) {
   const addinpdata = async (e) => {
     e.preventDefault();
 
-    const { title, date, formopendate, month, timefrom, timeend } = inpval;
+    const {
+      title,
+      date,
+      formopendate,
+      month,
+      image,
+      googleform,
+      timefrom,
+      timeend,
+    } = inpval;
 
     const res = await fetch("/api/eventpage/createevent", {
       method: "POST",
@@ -47,6 +58,8 @@ export default function EventModel({ mutate }) {
         date,
         formopendate,
         month,
+        image,
+        googleform,
         timefrom,
         timeend,
       }),
@@ -72,7 +85,6 @@ export default function EventModel({ mutate }) {
     }
   };
 
-
   //Show Month Name in Select Html Tags
   const [Data, setData] = useState([]);
 
@@ -87,7 +99,6 @@ export default function EventModel({ mutate }) {
   useEffect(() => {
     getInfo();
   }, []);
-
 
   return (
     <>
@@ -228,6 +239,38 @@ export default function EventModel({ mutate }) {
                           onChange={setdata}
                           value={inpval.timeend}
                           name="timeend"
+                          className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                        />
+                      </label>
+                    </div>
+
+                    <div>
+                      <div>
+                        <label className="block mt-5">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Image
+                          </span>
+                          <input
+                            type="text"
+                            onChange={setdata}
+                            value={inpval.image}
+                            placeholder="https://image.com"
+                            name="image"
+                            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="ml-5">
+                      <label className="block mt-5">
+                        <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                          Google Form Links
+                        </span>
+                        <input
+                          type="text"
+                          onChange={setdata}
+                          value={inpval.googleform}
+                          name="googleform"
                           className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                         />
                       </label>

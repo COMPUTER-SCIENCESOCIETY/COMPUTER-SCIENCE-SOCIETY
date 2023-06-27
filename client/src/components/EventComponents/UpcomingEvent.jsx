@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import EventModel from "./EventModel";
 import TableEvent from "./TableEvent";
 import { format } from "timeago.js";
+import {Link} from 'react-router-dom'
 
 const UpcomingEvent = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -24,13 +25,6 @@ const UpcomingEvent = () => {
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
-
-
-  const d = new Date();
-
-  const months = new Intl.DateTimeFormat("en-us", {
-    month: "long",
-  });
 
   let currentDate = new Date().toJSON().slice(0, 10);
   // console.log(currentDate); // "2022-06-17"
@@ -71,12 +65,6 @@ const UpcomingEvent = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
           {data.events.slice(0, 5).map((item, index) => (
             <SwiperSlide>
-              <div key={index} className={`${item.formopendate >= currentDate  ?'bg-gradient-to-r from-cyan-500 to-blue-500 h-96 rounded-xl':'bg-blue-200 h-96 rounded-xl'}`}>
-                <p className="m-5 pt-5 text-8xl text-white">
-                  {item.date.slice(8, 10)}
-                </p>
-                <p className="m-5 text-2xl text-white">{months.format(d)}</p>
-
               <div
                 key={index}
                 className={`${
@@ -85,17 +73,13 @@ const UpcomingEvent = () => {
                     : "bg-blue-200 h-96 rounded-xl"
                 }`}
               >
-         
-                  <div>
-                    <p className="m-5 pt-5 text-8xl text-white">
-                      {item.date.slice(8, 10)}
-                    </p>
-                  </div>
-          
+                <p className="m-5 pt-5 text-8xl text-white">
+                  {item.date.slice(8, 10)}
+                </p>
 
                 <p className="m-5 text-2xl text-white">{item.month}</p>
                 <div className="m-5 mt-8">
-                  <p className="text-xl text-white">{item.title}</p>
+                  <p className="text-xl text-white">{item.title.slice(0,40)}..</p>
                   <pre className="text-xl text-white pt-2">
                     {format(item.timeend)}
                   </pre>
@@ -105,15 +89,17 @@ const UpcomingEvent = () => {
                     Done
                   </button>
                 ) : currentDate <= item.formopendate ? (
-                  <button className="bg-lime-400 w-32 mx-4 rounded-2xl">
+                  <Link to={item.googleform}>
+                   <button className="bg-lime-400 w-32 mx-4 rounded-2xl">
                     Apply
                   </button>
+                  </Link>
+                 
                 ) : (
                   <button className="bg-amber-500 w-32 mx-4 rounded-2xl">
                     OVER
                   </button>
                 )}
-              </div>
               </div>
             </SwiperSlide>
           ))}

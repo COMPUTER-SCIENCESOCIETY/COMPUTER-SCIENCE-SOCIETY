@@ -84,7 +84,8 @@ const TableEvent = () => {
                     </td>
                     <td className="whitespace-nowrap px-12 py-4">
                       <div className="text-sm text-gray-900 ">
-                        {person.title}
+                        <p> {person.title.slice(0,60)}</p>
+                        <p> {person.title.slice(60)}</p>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-4 py-4">
