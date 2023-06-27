@@ -76,7 +76,7 @@ const TestimonIals = () => {
                     <div className="flex flex-col rounded-md bg-white h-96">
                       <div className="flex flex-1 flex-col justify-between p-8">
                         <div className="mb-4 flex space-x-2">
-                        <Rating name="size-large" defaultValue={data.Rating} size="large" />
+                        <Rating name="size-large" readOnly defaultValue={data.Rating} size="large" />
                         </div>
                         <div className="flex-1 pt-2">
                           <blockquote>

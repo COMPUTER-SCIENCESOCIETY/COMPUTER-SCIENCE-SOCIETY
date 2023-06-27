@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { RotatingLines } from "react-loader-spinner";
+import UpdateMember from "../UpdateTeam/UpdateMember";
+import { useSelector } from "react-redux";
 
 const SPONSERMEMBER = () => {
   const [data, setData] = React.useState([]);
   const [Loading, setLoading] = React.useState(false);
-
+  const { userInfo } = useSelector((state) => state.auth);
   React.useEffect(() => {
     axios.get("/api/creativemember/getsponsormember").then((response) => {
       setData(response.data.post);
@@ -28,10 +30,13 @@ const SPONSERMEMBER = () => {
                   fetchpriority="high"
                   className="h-32 w-32 m-3 object-cover rounded-full"
                 />
-                <div className="ml-5 m-3">
-                  <h3 className="text-xl font-semibold text-black">
-                    {item.NAME}
-                  </h3>
+                 <div className="ml-5 m-3">
+                  <div className="flex justify-between">
+                    <h3 className="text-xl font-semibold text-black">
+                      {item.NAME}
+                    </h3>
+                    {/* {userInfo ? <UpdateMember item={item} /> : ""} */}
+                  </div>
                   <p className="mt-3 text-base text-gray-600">
                     {item.YEAR} Year
                   </p>

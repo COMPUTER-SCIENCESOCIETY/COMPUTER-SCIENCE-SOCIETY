@@ -1,11 +1,14 @@
+import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { RotatingLines } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import UpdateMember from "../UpdateTeam/UpdateMember";
 
 const TechnicalTeam = () => {
   const [data, setData] = React.useState([]);
   const [Loading, setLoading] = React.useState(false);
-
+  const { userInfo } = useSelector((state) => state.auth);
   React.useEffect(() => {
     axios.get("/api/creativemember/gettechnicalmember").then((response) => {
       setData(response.data.post);
@@ -29,9 +32,12 @@ const TechnicalTeam = () => {
                   className="h-32 w-32 m-3 object-cover rounded-full"
                 />
                 <div className="ml-5 m-3">
-                  <h3 className="text-xl font-semibold text-black">
-                    {item.NAME}
-                  </h3>
+                  <div className="flex justify-between">
+                    <h3 className="text-xl font-semibold text-black">
+                      {item.NAME}
+                    </h3>
+                    {/* {userInfo ? <UpdateMember item={item} /> : ""} */}
+                  </div>
                   <p className="mt-3 text-base text-gray-600">
                     {item.YEAR} Year
                   </p>
