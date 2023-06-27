@@ -25,7 +25,6 @@ const TestimonIals = () => {
     getInfo();
   }, []);
 
-  console.log(Data);
 
   return (
     <div className="bg-gradient-to-b from-indigo-500">

@@ -1,10 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar-edit";
-import React,{ Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 
-export default function UpdateMember({ item,mutate }) {
-  console.log(item);
+export default function UpdateMember({ item, mutate }) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -26,57 +25,45 @@ export default function UpdateMember({ item,mutate }) {
     setPreview(view);
   };
 
-  //   const onBeforeFileLoad =(elem)=>{
-  //     if (elem.target.files[0].size > 71680) {
-  //         alert("File is too big!");
-  //         elem.target.value = "";
-  //       }
-  // }
-
   const [datas, setDatas] = React.useState({
     NAME: item.NAME,
     POST: item.POST,
     YEAR: item.YEAR,
-    image: item.image
-})
-
+    image: item.image,
+  });
 
   const setdata = (e) => {
     const { name, value } = e.target;
     setDatas((preval) => {
-        return {
-            ...preval,
-            [name]: value
-        }
-    })
-}
+      return {
+        ...preval,
+        [name]: value,
+      };
+    });
+  };
 
-const postUpdated = async (updateId) => {
-
-    const { NAME, POST, YEAR,image } = datas;
-
+  const postUpdated = async (updateId) => {
+    const { NAME, POST, YEAR, image } = datas;
     const res2 = await fetch(`/api/creativemember/headsocietyup/${updateId}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            NAME, POST, YEAR,image:preview
-        })
-    })
-
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        NAME,
+        POST,
+        YEAR,
+        image: preview,
+      }),
+    });
     const data2 = await res2.json();
-    // console.log(data2);
-
     if (res2.status === 422 || !data2) {
-        alert("fill the data")
+      alert("fill the data");
     } else {
-        alert("Data updated successfully");
-      
+      alert("Data updated successfully");
     }
-    mutate()
-}
-
+    mutate();
+  };
 
   return (
     <>
@@ -130,7 +117,10 @@ const postUpdated = async (updateId) => {
                             />
                           )
                         ) : (
-                          <img src={item.image} className="h-48 w-48 rounded-full"/>
+                          <img
+                            src={item.image}
+                            className="h-48 w-48 rounded-full"
+                          />
                         )}
                       </div>
                       <div>
@@ -142,7 +132,7 @@ const postUpdated = async (updateId) => {
                           src={src}
                         />
                       </div>
-                    </div>           
+                    </div>
                     <div>
                       <label
                         htmlFor=""
@@ -156,9 +146,8 @@ const postUpdated = async (updateId) => {
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
                           onChange={setdata}
-                          name='NAME'
+                          name="NAME"
                           value={datas.NAME}
-                         
                         ></input>
                       </div>
                     </div>
@@ -175,7 +164,7 @@ const postUpdated = async (updateId) => {
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
                           onChange={setdata}
-                          name='POST'
+                          name="POST"
                           value={datas.POST}
                         ></input>
                       </div>
@@ -192,9 +181,8 @@ const postUpdated = async (updateId) => {
                         <input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
-                          name='YEAR'
+                          name="YEAR"
                           value={datas.YEAR}
-
                         ></input>
                       </div>
                     </div>
