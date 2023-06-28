@@ -1,26 +1,27 @@
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import axios from "axios";
-import React, { useEffect } from "react";
-import { RotatingLines } from "react-loader-spinner";
+import React from "react";
 import { useSelector } from "react-redux";
-import UpdateMember from "../UpdateTeam/UpdateMember";
+import useSWR from "swr";
+import UpTechnicalMember from "../UpdateTeam/UpTechnicalMember";
 
 const TechnicalTeam = () => {
-  const [data, setData] = React.useState([]);
-  const [Loading, setLoading] = React.useState(false);
+
   const { userInfo } = useSelector((state) => state.auth);
-  React.useEffect(() => {
-    axios.get("/api/creativemember/gettechnicalmember").then((response) => {
-      setData(response.data.post);
-      setLoading(true);
-    });
-  }, []);
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  const { data, mutate, error, isLoading } = useSWR(
+    "/api/creativemember/gettechnicalmember",
+    fetcher
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+
 
   return (
     <div className="mb-10">
-      {Loading ? (
         <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((item,index) => (
+          {data.post.map((item,index) => (
             <>
               <div className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300" key={index}>
                 <img
@@ -36,7 +37,7 @@ const TechnicalTeam = () => {
                     <h3 className="text-xl font-semibold text-black">
                       {item.NAME}
                     </h3>
-                    {/* {userInfo ? <UpdateMember item={item} /> : ""} */}
+                    {userInfo ? <UpTechnicalMember item={item} mutate={mutate} /> : ""}
                   </div>
                   <p className="mt-3 text-base text-gray-600">
                     {item.YEAR} Year
@@ -49,17 +50,6 @@ const TechnicalTeam = () => {
             </>
           ))}
         </div>
-      ) : (
-        <div className="flex justify-center">
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-        </div>
-      )}
     </div>
   );
 };

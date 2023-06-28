@@ -1,25 +1,32 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { RotatingLines } from "react-loader-spinner";
+import useSWR from "swr";
+import { useSelector } from 'react-redux';
+import UpEventCoordinate from '../UpdateTeam/UpEventCoordinate';
 
 const EventCodinator = () => {
-  const [data, setData] = React.useState([]);
-  const [Loading, setLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    axios.get("/api/creativemember/geteventcodinator").then((response) => {
-      setData(response.data.post);
-      setLoading(true)
-    });
-  }, []);
+  const [Loading, setLoading] = React.useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
+
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  const { data, mutate, error, isLoading } = useSWR(
+    "/api/creativemember/geteventcodinator",
+    fetcher
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+
 
  
 
   return (
     <div className="mb-10">
-      {Loading ? (
         <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((item,index) => (
+          {data.post.map((item,index) => (
             <>
               <div className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300" key={index}>
                 <img
@@ -30,10 +37,13 @@ const EventCodinator = () => {
                     fetchpriority="high"
                   className="h-32 w-32 m-3 object-cover rounded-full"
                 />
-                <div className="ml-5 m-3">
-                  <h3 className="text-xl font-semibold text-black">
-                    {item.NAME}
-                  </h3>
+            <div className="ml-5 m-3">
+                  <div className="flex justify-between">
+                    <h3 className="text-xl font-semibold text-black">
+                      {item.NAME}
+                    </h3>
+                    {userInfo ? <UpEventCoordinate item={item} mutate={mutate}/> : ""}
+                  </div>
                   <p className="mt-3 text-base text-gray-600">
                     {item.YEAR} Year
                   </p>
@@ -46,18 +56,7 @@ const EventCodinator = () => {
             
           ))}
           </div>
-      
-      ) : (
-        <div className="flex justify-center">
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-        </div>
-      )}
+   
     </div>
   )
 }
