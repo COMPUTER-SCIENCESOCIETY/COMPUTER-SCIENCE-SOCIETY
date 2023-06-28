@@ -31,10 +31,36 @@ const TeamWorking = () => {
             </h2>
           </div>
           <hr />
-          <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+          <div className="mt-8 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:grid-cols-4">
             {data.post.map((item, index) => (
               <>
-                <div
+                <div className="ring-2 ring-zinc-700 rounded-xl">
+                  <div className="flex justify-center">
+                    <img
+                      src={item.image}
+                      alt="loading"
+                      className="h-32 w-32 m-3 object-cover rounded-full ring-2 ring-amber-400"
+                    />
+                  </div>
+                  <div>
+                    <p className=" text-center text-xl font-semibold text-black">
+                      {item.NAME}
+                    </p>
+                    <p className="text-center">{item.YEAR}</p>
+                    <p className="text-center bg-zinc-700 text-white">
+                      {item.POST}
+                    </p>
+                    <div className="mb-4 mt-4">
+                      {userInfo ? (
+                        <UpdateMember item={item} mutate={mutate} />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {/* <div
                   className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300"
                   key={index}
                 >
@@ -44,7 +70,7 @@ const TeamWorking = () => {
                     loading="lazy"
                     decoding="async"
                     fetchpriority="high"
-                    className="h-32 w-32 m-3 object-cover rounded-full"
+                    className="h-32 w-20 m-3 object-cover rounded-full"
                   />
                   <div className="ml-5 m-3">
                     <div className="flex justify-between">
@@ -65,7 +91,7 @@ const TeamWorking = () => {
                       <p className="mt-3 text-base text-white">{item.POST}</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </>
             ))}
           </div>
@@ -91,10 +117,9 @@ const TeamWorking = () => {
         </div>
         <hr />
         <div className="pb-16">
-          <MediaLens/>
+          <MediaLens />
         </div>
       </div>
-     
     </div>
   );
 };
