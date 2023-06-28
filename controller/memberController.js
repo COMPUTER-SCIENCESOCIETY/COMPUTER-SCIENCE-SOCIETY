@@ -6,6 +6,8 @@ import headsoceity from "../models/headsociety.js";
 import sponsers from "../models/sponserModel.js";
 import sportmembers from "../models/sportModel.js";
 
+
+//get all post
 const getHeadUser = async (req, res) => {
   headsoceity
     .find()
@@ -97,6 +99,7 @@ const getLensMedia = async (req, res) => {
     });
 };
 
+//update section
 const headUpdate = async (req, res) => {
   try {
     const { id } = req.params;

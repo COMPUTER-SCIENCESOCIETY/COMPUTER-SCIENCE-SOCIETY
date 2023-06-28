@@ -17,6 +17,7 @@ import { LoginScreen } from "./pages/Auth/LoginScreen.jsx";
 import EventWorking from "./pages/Event/EventWorking.jsx";
 import { HelmetProvider } from "react-helmet-async";
 import GalleryImage from "./components/GalleryComponent/GalleryImage.jsx";
+import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path="/auth/login" element={<LoginScreen />} />
       <Route path="/events" element={<EventWorking />} />
       <Route path="/gallery" element={<GalleryImage />} />
+      <Route path="/*" element={<PageNotFound/>} />
     </Route>
   )
 );
