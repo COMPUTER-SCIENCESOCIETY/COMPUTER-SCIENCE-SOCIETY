@@ -1,4 +1,5 @@
 import eventcodinator from "../models/EventCodinatorModel.js";
+import lensmedias from "../models/LensMediaModel.js";
 import techincalmembers from "../models/TechnicalModel.js";
 import creatativemembers from "../models/creatativeModel.js";
 import headsoceity from "../models/headsociety.js";
@@ -72,6 +73,19 @@ const getSponserUser = async (req, res) => {
 
 const getSportUser = async (req, res) => {
   sportmembers
+    .find()
+    .populate("postedBy", "name")
+    .sort({ createdAt: -1 })
+    .then((post) => {
+      res.json({ post });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getLensMedia = async (req, res) => {
+  lensmedias
     .find()
     .populate("postedBy", "name")
     .sort({ createdAt: -1 })
@@ -159,6 +173,18 @@ const sportUpdate = async (req, res) => {
   }
 };
 
+const lensmediaUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateduser = await lensmedias.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+};
+
 export {
   getHeadUser,
   getallposts,
@@ -166,10 +192,12 @@ export {
   getTechnicalUser,
   getSponserUser,
   getSportUser,
+  getLensMedia,
   headUpdate,
   creativeUpdate,
   eventCodinatorUpdate,
   TechnicalUpdate,
   sponserUpdate,
   sportUpdate,
+  lensmediaUpdate
 };

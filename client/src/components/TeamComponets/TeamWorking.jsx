@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import useSWR from "swr";
 import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
 import UpdateMember from "./UpdateTeam/UpdateMember";
+import MediaLens from "./MemberTeam/MediaLens";
 
 const TeamWorking = () => {
-  const [Data, setData] = useState([]);
-
   const { userInfo } = useSelector((state) => state.auth);
-
   //heade of society members
-
-  // React.useEffect(() => {
-  //   axios.get("/api/creativemember/getheadmember").then((response) => {
-  //     setData(response.data.post);
-  //   });
-  // }, []);
-
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, mutate, error, isLoading } = useSWR(
@@ -27,7 +17,6 @@ const TeamWorking = () => {
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
-
 
   return (
     <div className="mt-5">
@@ -62,7 +51,11 @@ const TeamWorking = () => {
                       <h3 className="text-xl font-semibold text-black">
                         {item.NAME}
                       </h3>
-                      {userInfo ? <UpdateMember item={item} mutate={mutate} /> : ""}
+                      {userInfo ? (
+                        <UpdateMember item={item} mutate={mutate} />
+                      ) : (
+                        ""
+                      )}
                     </div>
 
                     <p className="mt-3 text-base text-gray-600">
@@ -79,7 +72,7 @@ const TeamWorking = () => {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-2 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 lg:px-5">
         <div className="mb-4 max-w-lg">
           <h2 className="mt-6 text-3xl font-bold leading-tight text-black">
             TEAM MEMBER
@@ -90,6 +83,18 @@ const TeamWorking = () => {
           <TeamMember />
         </div>
       </div>
+      <div className="mx-auto max-w-7xl px-2 lg:px-5">
+        <div className="mb-4 max-w-lg">
+          <h2 className="mt-2 text-3xl font-bold leading-tight text-black">
+            LENS / MEDIA TEAM MEMBER
+          </h2>
+        </div>
+        <hr />
+        <div className="pb-16">
+          <MediaLens/>
+        </div>
+      </div>
+     
     </div>
   );
 };

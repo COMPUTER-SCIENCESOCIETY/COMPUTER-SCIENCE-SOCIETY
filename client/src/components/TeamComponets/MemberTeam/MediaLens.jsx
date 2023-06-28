@@ -1,15 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import UpSonserMember from "../UpdateTeam/UpSonserMember";
 import useSWR from "swr";
+import UpLensMediaMember from "../UpdateTeam/UpLensMediaMember";
 
-const SPONSERMEMBER = () => {
+const MediaLens = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, mutate, error, isLoading } = useSWR(
-    "/api/creativemember/getsponsormember",
+    "/api/creativemember/getlensmedia",
     fetcher
   );
 
@@ -35,7 +35,7 @@ const SPONSERMEMBER = () => {
                     <h3 className="text-xl font-semibold text-black">
                       {item.NAME}
                     </h3>
-                    {userInfo ? <UpSonserMember item={item}  mutate={mutate}/> : ""}
+                    {userInfo ? <UpLensMediaMember item={item}  mutate={mutate}/> : ""}
                   </div>
                   <p className="mt-3 text-base text-gray-600">
                     {item.YEAR} Year
@@ -52,4 +52,4 @@ const SPONSERMEMBER = () => {
   );
 };
 
-export default SPONSERMEMBER;
+export default MediaLens;

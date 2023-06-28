@@ -30,20 +30,23 @@ const Headers = () => {
             <img src={logo} alt="loading" className="w-16 h-16" />
             <Link to="/">
               <p className=" capitalize font-bold">
-                information technology society {userInfo ? "Dashboards" : ""}
+                information technology society   
               </p>
             </Link>
+            <img src="https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f1ee-1f1f3.svg" alt="loading" className="w-16 h-16 mx-2"/>
           </div>
           <>
+          
             {userInfo ? (
               <>
-                <div className=" flex justify-start items-center mx-4">
+                <div className=" flex justify-start items-center mx-2">
                   <p
                     onClick={logoutHandler}
                     className="mx-1 lg:mx-5 bg-red-400 cursor-pointer w-20 text-center rounded-full font-semibold hover:bg-slate-200"
                   >
                     Logout
                   </p>
+                
                 </div>
               </>
             ) : (

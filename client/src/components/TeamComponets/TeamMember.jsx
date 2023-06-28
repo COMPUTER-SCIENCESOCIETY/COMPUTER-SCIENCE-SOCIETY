@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import Creatativemember from "./MemberTeam/Creatativemember";
 import EventCodinator from "./MemberTeam/EventCodinator";
-import LensMan from "./MemberTeam/LensMan";
 import TechnicalTeam from "./MemberTeam/technicalTeam";
 import SPONSERMEMBER from "./MemberTeam/SPONSERMEMBER";
 import SPORTSMEMBER from "./MemberTeam/SPORTSMEMBER";
@@ -96,7 +94,6 @@ export default function TeamMember() {
             <SPORTSMEMBER/>
           </Tab.Panel>
           <Tab.Panel><SPONSERMEMBER /></Tab.Panel>
-
         </Tab.Panels>
       </Tab.Group>
     </div>

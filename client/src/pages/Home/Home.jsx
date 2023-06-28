@@ -9,14 +9,17 @@ import Sponser from "../Sponser/Sponser";
 import ContactForm from "../../components/ContactComponent/ContactForm";
 import { Helmet } from "react-helmet-async";
 
+
+
 const Home = () => {
+
   return (
     <div className="mb-10">
       <Helmet prioritizeSeoTags>
         <title>Information technology Society</title>
-        <link rel="notImportant" href="https://www.chipotle.com" />
+        <link rel="notImportant" href="https://itsoffical.cyclic.app" />
         <meta name="whatever" value="notImportant" />
-        <link rel="canonical" href="https://www.tacobell.com" />
+        <link rel="canonical" href="https://itsoffical.cyclic.app" />
         <meta property="og:title" content="Information technology Society Home Page" />
       </Helmet>
       <MainSlide />
