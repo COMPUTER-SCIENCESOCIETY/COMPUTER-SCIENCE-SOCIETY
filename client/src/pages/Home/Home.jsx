@@ -8,6 +8,7 @@ import FooterSticky from "../../components/HomeComponets/FooterSticky";
 import Sponser from "../Sponser/Sponser";
 import ContactForm from "../../components/ContactComponent/ContactForm";
 import { Helmet } from "react-helmet-async";
+import NumberofTeam from "../../components/HomeComponets/NumberofTeam";
 
 
 
@@ -25,6 +26,7 @@ const Home = () => {
       <MainSlide />
       <About />
       <Vision />
+      <NumberofTeam/>
       <Sponser />
       <TestimonIals />
       <ContactForm />
