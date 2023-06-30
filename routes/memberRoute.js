@@ -15,10 +15,12 @@ import {
   sponserUpdate,
   getLensMedia,
   lensmediaUpdate,
+  getHeadUserCount,
 } from "../controller/memberController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/getheadmember").get(getHeadUser);
+router.route("/getheadmembercount").get(getHeadUserCount);
 router.route("/getcreativemember").get(getallposts);
 router.route("/geteventcodinator").get(getEventCodSch);
 router.route("/gettechnicalmember").get(getTechnicalUser);

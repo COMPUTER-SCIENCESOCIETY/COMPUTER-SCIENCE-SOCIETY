@@ -11,7 +11,8 @@ import { useSelector } from "react-redux";
 import EventModel from "./EventModel";
 import TableEvent from "./TableEvent";
 import { format } from "timeago.js";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const UpcomingEvent = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -24,13 +25,20 @@ const UpcomingEvent = () => {
   );
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading)
+    return (
+      <div className="">
+        {" "}
+        <LinearProgress color="success" />
+      </div>
+    );
 
   let currentDate = new Date().toJSON().slice(0, 10);
   // console.log(currentDate); // "2022-06-17"
 
   return (
-    <>
+    <div className="container mx-auto max-w-7xl px-2 lg:px-8">
+      <p className="text-3xl font-bold text-slate-500 pt-4">Upcoming Event</p>
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
@@ -79,7 +87,9 @@ const UpcomingEvent = () => {
 
                 <p className="m-5 text-2xl text-white">{item.month}</p>
                 <div className="m-5 mt-8">
-                  <p className="text-xl text-white">{item.title.slice(0,40)}..</p>
+                  <p className="text-xl text-white">
+                    {item.title.slice(0, 40)}..
+                  </p>
                   <pre className="text-xl text-white pt-2">
                     {format(item.timeend)}
                   </pre>
@@ -90,11 +100,10 @@ const UpcomingEvent = () => {
                   </button>
                 ) : currentDate <= item.formopendate ? (
                   <Link to={item.googleform}>
-                   <button className="bg-lime-400 w-32 mx-4 rounded-2xl">
-                    Apply
-                  </button>
+                    <button className="bg-lime-400 w-32 mx-4 rounded-2xl">
+                      Apply
+                    </button>
                   </Link>
-                 
                 ) : (
                   <button className="bg-amber-500 w-32 mx-4 rounded-2xl">
                     OVER
@@ -116,7 +125,7 @@ const UpcomingEvent = () => {
 
         <TableEvent />
       </div>
-    </>
+    </div>
   );
 };
 
