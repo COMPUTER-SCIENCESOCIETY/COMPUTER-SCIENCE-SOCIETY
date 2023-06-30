@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 const FooterSticky = () => {
   return (
     <div>
+    
       {" "}
       <section className="relative overflow-hidden bg-white py-8 mt-7">
         <div className="container relative z-10 mx-auto px-4">

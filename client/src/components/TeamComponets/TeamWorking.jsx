@@ -4,6 +4,7 @@ import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
 import UpdateMember from "./UpdateTeam/UpdateMember";
 import MediaLens from "./MemberTeam/MediaLens";
+import { LinearProgress } from "@mui/material";
 
 const TeamWorking = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -16,7 +17,15 @@ const TeamWorking = () => {
   );
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <div className="">
+          {" "}
+          <LinearProgress color="success" />
+        </div>
+      </div>
+    );
 
   return (
     <div className="mt-5">

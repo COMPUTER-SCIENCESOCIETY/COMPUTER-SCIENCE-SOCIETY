@@ -19,18 +19,22 @@ import { HelmetProvider } from "react-helmet-async";
 import GalleryImage from "./components/GalleryComponent/GalleryImage.jsx";
 import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
-
 const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<Home />} />
-      <Route path="/teams" element={<Teams />} />
-      <Route path="/auth/login" element={<LoginScreen />} />
-      <Route path="/events" element={<EventWorking />} />
-      <Route path="/gallery" element={<GalleryImage />} />
-      <Route path="/*" element={<PageNotFound/>} />
-    </Route>
-  )
+  
+   
+    createRoutesFromElements(
+    <>
+      <Route path="/" element={<App />}>
+        <Route index={true} path="/" element={<Home />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/auth/login" element={<LoginScreen />} />
+        <Route path="/events" element={<EventWorking />} />
+        <Route path="/gallery" element={<GalleryImage />} />
+        <Route path="/*" element={<PageNotFound />} />
+      </Route>
+    </>
+    )
+  
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(

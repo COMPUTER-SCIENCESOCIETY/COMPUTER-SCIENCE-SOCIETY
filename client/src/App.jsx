@@ -12,14 +12,17 @@ const App = () => {
     setLoading(true);
   }, 1000);
 
+  const [progress, setProgress] = useState(0)
+
   return (
     <div>
       {loading ? (
-        <>
-          <Headers />
-          <Outlet />
-          <Footer />
-        </>
+      <>
+        <Headers />
+        <Outlet />
+     
+        <Footer />
+      </>
       ) : (
         <Loading/>
       )}
