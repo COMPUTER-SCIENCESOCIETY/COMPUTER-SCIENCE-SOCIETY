@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useSWR from "swr";
 import TeamMember from "./TeamMember";
 import { useSelector } from "react-redux";
 import UpdateMember from "./UpdateTeam/UpdateMember";
 import MediaLens from "./MemberTeam/MediaLens";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress, Tooltip } from "@mui/material";
+import {
+  ShareIcon,
+  CheckBadgeIcon,
+  AcademicCapIcon,
+} from "@heroicons/react/24/solid";
 
 const TeamWorking = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -44,6 +49,48 @@ const TeamWorking = () => {
             {data.post.map((item, index) => (
               <>
                 <div
+                  className="ring-2 pb-3 ring-orange-400 rounded-2xl"
+                  key={index}
+                >
+                  <div className="flex justify-center bg-gradient-to-r from-cyan-500 to-blue-500 rounded-t-2xl">
+                    <img
+                      src={item.image}
+                      alt="loading"
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="high"
+                      className="h-32 w-32 m-3 bg-amber-300 object-cover rounded-full"
+                    />
+                  </div>
+                  <hr/>
+                  <div className="text-center">
+                    <div className="flex justify-center items-center space-x-2">
+                      <p className="text-xl text-center font-semibold text-black">
+                        {item.NAME}
+                      </p>
+                      <CheckBadgeIcon className="h-6 w-6 text-blue-500" />
+                    </div>
+                    <div className="bg-orange-400  text-center">
+                      <p className="mt-3 text-base text-white">{item.POST}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-around pt-2">
+                    <div>
+                      <ShareIcon className="h-6 w-6 text-red-500 cursor-pointer" />
+                    </div>
+                    <div>
+                      {userInfo ? (
+                        <UpdateMember item={item} mutate={mutate} />
+                      ) : (
+                        <Tooltip title={`${item.YEAR} Years`}>
+                          <AcademicCapIcon className="h-6 w-6 cursor-pointer text-teal-500" />
+                        </Tooltip>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div
                   className="flex items-start ring-1 ring-amber-300 rounded-lg hover:bg-amber-300"
                   key={index}
                 >
@@ -74,7 +121,7 @@ const TeamWorking = () => {
                       <p className="mt-3 text-base text-white">{item.POST}</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </>
             ))}
           </div>

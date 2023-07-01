@@ -70,7 +70,7 @@ export default function UpdateMember({ item, mutate }) {
       <div className="flex items-center justify-center">
         <PencilSquareIcon
           onClick={openModal}
-          className="h-6 w-6 text-blue-500 cursor-pointer"
+          className="h-6 w-6 text-zinc-500 cursor-pointer"
         />
       </div>
 
