@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { UserIcon } from "@heroicons/react/24/solid";
-import useSWR from "swr";
+import CountUp from 'react-countup';
+import ScrollTrigger from 'react-scroll-trigger';
+
+
 const NumberofTeam = () => {
   const [Data, setData] = useState([]);
+  const [counterOn,setCounterOn] = useState(false)
 
   const getInfo = async () => {
     const infos = await fetch("/api/creativemember/getheadmembercount");
@@ -15,6 +18,7 @@ const NumberofTeam = () => {
   }, []);
 
   return (
+    <ScrollTrigger onEnter={()=>setCounterOn(true)} onExit={()=>setCounterOn(false)}>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
       <div className="mx-auto max-w-xl text-center">
         <h2 className="mt-6 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
@@ -37,7 +41,10 @@ const NumberofTeam = () => {
               />
             </div>
             <h3 className="mt-8 text-lg font-semibold text-black">
-              {item.count}+
+            {
+              counterOn &&  <CountUp start={0} duration={6} delay={0} end={item.count} /> 
+            } +
+           
             </h3>
             <div className="mt-2">
               <hr />
@@ -48,6 +55,7 @@ const NumberofTeam = () => {
         ))}
       </div>
     </div>
+    </ScrollTrigger>
   );
 };
 
