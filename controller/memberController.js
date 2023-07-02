@@ -6,7 +6,6 @@ import headsoceity from "../models/headsociety.js";
 import sponsers from "../models/sponserModel.js";
 import sportmembers from "../models/sportModel.js";
 
-
 //get all post
 const getHeadUser = async (req, res) => {
   headsoceity
@@ -14,38 +13,65 @@ const getHeadUser = async (req, res) => {
     .populate("postedBy", "name")
     .sort({ createdAt: -1 })
     .then((post) => {
-      res.json({ post });
+      res.json({ post, processId: process.pid });
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-
 const getHeadUserCount = async (req, res) => {
-
   try {
-      const headofsociety = await headsoceity.countDocuments()
-      const creatativesociety = await creatativemembers.countDocuments()
-      const eventCodinatorsoceity = await eventcodinator.countDocuments()
-      const techincalsociety = await techincalmembers.countDocuments()
-      const sponsersociety = await sponsers.countDocuments()
-      const sportsociety = await sportmembers.countDocuments()
-      const lensmediasociety = await lensmedias.countDocuments()
+    const headofsociety = await headsoceity.countDocuments();
+    const creatativesociety = await creatativemembers.countDocuments();
+    const eventCodinatorsoceity = await eventcodinator.countDocuments();
+    const techincalsociety = await techincalmembers.countDocuments();
+    const sponsersociety = await sponsers.countDocuments();
+    const sportsociety = await sportmembers.countDocuments();
+    const lensmediasociety = await lensmedias.countDocuments();
 
-      res.status(200).json([
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=king",img:"https://api.dicebear.com/5.x/avataaars/svg?seed=king",name:"CORE TEAM" ,count: headofsociety },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=creative",name:"CREATIVE MEMBER", count: creatativesociety },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=event",name:"EVENT-CODINATOR MEMBER", count: eventCodinatorsoceity },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=technical",name:"TECHNICAL MEMBER", count: techincalsociety },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=sponser",name:"SPONSER MEMBER", count: sponsersociety },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=sportperson",name:"SPORTS MEMBER", count: sportsociety },
-          {img:"https://api.dicebear.com/5.x/avataaars/svg?seed=media",name:"LENS / MEDIA MEMBER", count: lensmediasociety },
-      ]);
+    res.status(200).json([
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=king",
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=king",
+        name: "CORE TEAM",
+        count: headofsociety,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=creative",
+        name: "CREATIVE MEMBER",
+        count: creatativesociety,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=event",
+        name: "EVENT-CODINATOR MEMBER",
+        count: eventCodinatorsoceity,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=technical",
+        name: "TECHNICAL MEMBER",
+        count: techincalsociety,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=sponser",
+        name: "SPONSER MEMBER",
+        count: sponsersociety,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=sportperson",
+        name: "SPORTS MEMBER",
+        count: sportsociety,
+      },
+      {
+        img: "https://api.dicebear.com/5.x/avataaars/svg?seed=media",
+        name: "LENS / MEDIA MEMBER",
+        count: lensmediasociety,
+      },
+    ]);
   } catch (error) {
-      res.status(500).json(error)
+    res.status(500).json(error);
   }
-}
+};
 
 const getallposts = async (req, res) => {
   creatativemembers
@@ -229,5 +255,5 @@ export {
   TechnicalUpdate,
   sponserUpdate,
   sportUpdate,
-  lensmediaUpdate
+  lensmediaUpdate,
 };

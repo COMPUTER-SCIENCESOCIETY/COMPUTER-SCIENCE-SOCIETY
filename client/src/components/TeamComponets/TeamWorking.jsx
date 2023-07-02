@@ -33,13 +33,35 @@ const TeamWorking = () => {
     );
 
   return (
-    <div className="mt-5">
+    <div className="pt-5 bg-stone-200">
       <section>
         <div className="mx-auto max-w-7xl px-2 lg:px-8">
           <div className="mb-4 max-w-lg">
             <p className="text-sm font-semibold uppercase tracking-widest text-black">
               Information Technology Society (I T S) Team.
             </p>
+            <div>
+              <div className="flex justify-between space-x-2 pt-5">
+                <div className="flex justify-start items-center bg-white rounded-full shadow-lg shadow-amber-400">
+                  <CheckBadgeIcon className="h-6 w-6 mx-2  text-amber-400" />
+                  <p className="text-xl px-2 text-center font-semibold text-black">
+                    Core Team
+                  </p>
+                </div>
+                <div className="flex justify-start items-center bg-white  rounded-full shadow-lg shadow-fuchsia-400">
+                  <CheckBadgeIcon className="h-6 w-6 mx-2 text-fuchsia-400" />
+                  <p className="text-xl px-2 text-center font-semibold text-black">
+                    Team Member
+                  </p>
+                </div>
+                <div className="flex justify-start items-center bg-white  rounded-full shadow-lg shadow-purple-400">
+                  <CheckBadgeIcon className="h-6 w-6 mx-2 text-purple-400" />
+                  <p className="text-xl px-2 text-center font-semibold text-black">
+                    Lens / Media
+                  </p>
+                </div>
+              </div>
+            </div>
             <h2 className="mt-6 text-3xl font-bold leading-tight text-black">
               CORE TEAM
             </h2>
@@ -49,32 +71,34 @@ const TeamWorking = () => {
             {data.post.map((item, index) => (
               <>
                 <div
-                  className="ring-2 pb-3 ring-orange-400 rounded-2xl"
+                  className="pb-3 container mx-auto bg-white h-80 shadow-xl rounded-xl"
                   key={index}
                 >
-                  <div className="flex justify-center bg-gradient-to-r from-cyan-500 to-blue-500 rounded-t-2xl">
+                  <div className="flex justify-center  rounded-t-2xl">
                     <img
                       src={item.image}
                       alt="loading"
                       loading="lazy"
                       decoding="async"
                       fetchpriority="high"
-                      className="h-32 w-32 m-3 bg-amber-300 object-cover rounded-full"
+                      className="h-32 w-32 m-3 ring-2 ring-amber-300 bg-amber-300 object-cover rounded-full"
                     />
                   </div>
-                  <hr/>
+
                   <div className="text-center">
                     <div className="flex justify-center items-center space-x-2">
-                      <p className="text-xl text-center font-semibold text-black">
+                      <p className="text-xl pt-4 text-center font-semibold text-black">
                         {item.NAME}
                       </p>
-                      <CheckBadgeIcon className="h-6 w-6 text-blue-500" />
+                      <Tooltip title={"verified"}>
+                        <CheckBadgeIcon className="h-6 w-6 mt-4 text-amber-400" />
+                      </Tooltip>
                     </div>
-                    <div className="bg-orange-400  text-center">
-                      <p className="mt-3 text-base text-white">{item.POST}</p>
+                    <div className="bg-orange-400 mt-8  text-center">
+                      <p className="text-base text-white">{item.POST}</p>
                     </div>
                   </div>
-                  <div className="flex justify-around pt-2">
+                  <div className="flex justify-around pt-5">
                     <div>
                       <ShareIcon className="h-6 w-6 text-red-500 cursor-pointer" />
                     </div>
@@ -82,14 +106,14 @@ const TeamWorking = () => {
                       {userInfo ? (
                         <UpdateMember item={item} mutate={mutate} />
                       ) : (
-                        <Tooltip title={`${item.YEAR} Years`}>
+                        <div className="flex justify-center space-x-2">
                           <AcademicCapIcon className="h-6 w-6 cursor-pointer text-teal-500" />
-                        </Tooltip>
+                          <p>{item.YEAR} Years</p>
+                        </div>
                       )}
                     </div>
                   </div>
                 </div>
-
               </>
             ))}
           </div>
