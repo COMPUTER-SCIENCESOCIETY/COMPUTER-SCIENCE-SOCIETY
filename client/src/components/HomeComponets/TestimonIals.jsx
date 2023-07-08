@@ -85,7 +85,7 @@ const TestimonIals = () => {
                           </blockquote>
                         </div>
 
-                        <div className="mt-8 border-t border-gray-300 pt-4 dark:border-gray-800">
+                        <div className=" border-t border-gray-300 pt-4 dark:border-gray-800">
                           <div className="flex items-center">
                             <img
                               className="h-10 w-10 flex-shrink-0 rounded-full object-cover"

@@ -30,6 +30,7 @@ export default function UpdateMember({ item, mutate }) {
     POST: item.POST,
     YEAR: item.YEAR,
     image: item.image,
+    dob: item.dob,
   });
 
   const setdata = (e) => {
@@ -43,7 +44,7 @@ export default function UpdateMember({ item, mutate }) {
   };
 
   const postUpdated = async (updateId) => {
-    const { NAME, POST, YEAR, image } = datas;
+    const { NAME, POST, YEAR, dob,image } = datas;
     const res2 = await fetch(`/api/creativemember/headsocietyup/${updateId}`, {
       method: "PATCH",
       headers: {
@@ -53,6 +54,7 @@ export default function UpdateMember({ item, mutate }) {
         NAME,
         POST,
         YEAR,
+        dob,
         image: preview,
       }),
     });
@@ -70,7 +72,7 @@ export default function UpdateMember({ item, mutate }) {
       <div className="flex items-center justify-center">
         <PencilSquareIcon
           onClick={openModal}
-          className="h-6 w-6 text-zinc-500 cursor-pointer"
+          className="h-6 w-6 z-10 text-zinc-500 cursor-pointer"
         />
       </div>
 
@@ -182,7 +184,26 @@ export default function UpdateMember({ item, mutate }) {
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type="text"
                           name="YEAR"
+                          onChange={setdata}
                           value={datas.YEAR}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <label
+                        htmlFor=""
+                        className="text-base font-medium text-gray-900"
+                      >
+                        {" "}
+                        Date Of Birth{" "}
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                          type="date"
+                          name="dob"
+                          onChange={setdata}
+                          value={datas.dob}
                         ></input>
                       </div>
                     </div>
