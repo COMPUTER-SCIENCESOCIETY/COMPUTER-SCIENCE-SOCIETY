@@ -18,10 +18,10 @@ export default function MessageHead({ item }) {
   return (
     <>
       <div className="flex items-center justify-center">
-        <div class="relative">
+        <div class="relative z-10">
           <EnvelopeIcon
             onClick={openModal}
-            className="h-6 w-6 z-10 text-red-500 cursor-pointer"
+            className="h-6 w-6  text-red-500 cursor-pointer"
           />
           <span class="top-0 left-4 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
         </div>
@@ -58,7 +58,7 @@ export default function MessageHead({ item }) {
                     className="text-lg font-medium leading-6 text-gray-900 mb-3"
                   >
                     <div className="flex justify-between">
-                      <div>Special Message From ITS Team</div>
+                      <div className=" underline underline-offset-2">Special Message From ITS Team</div>
                       <div className=" cursor-pointer" onClick={closeModal}>
                         ❌
                       </div>
@@ -70,13 +70,13 @@ export default function MessageHead({ item }) {
                       <br />
                       <br />
                       Today, we celebrate another incredible year of your life
-                      as you turn {Dateyear - item.dob?.slice(0, 4)} Age. It's a
+                      as you turn {Dateyear - item.dob?.slice(0, 4)} Years. It's a
                       special milestone that reminds us of the amazing person
                       you have become.
                       <br />
                       <br />
                       You are an extraordinary friend,
-                      {Dateyear - item.dob?.slice(0, 4)} Age . Your friendship
+                      {Dateyear - item.dob?.slice(0, 4)} Years . Your friendship
                       has brought so much joy and meaning to my life. Through
                       the ups and downs, you have been there, offering support,
                       laughter, and genuine companionship. Your presence is a
@@ -97,7 +97,7 @@ export default function MessageHead({ item }) {
                       the remarkable person you are.
                       <br />
                       <br />
-                      Happy {Dateyear - item.dob?.slice(0, 4)} Age birthday,{" "}
+                      Happy {Dateyear - item.dob?.slice(0, 4)} Year birthday,{" "}
                       {item.NAME}! 🎉🎁🎊 May this day be filled with love,
                       laughter, and wonderful surprises. Enjoy every moment,
                       surrounded by the warmth of family and friends.
