@@ -17,6 +17,9 @@ const headsoceitySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    dob:{
+      type: String,
+    },
     image:{
         type: String,
         required: true,

@@ -10,6 +10,10 @@ import {
   CheckBadgeIcon,
   AcademicCapIcon,
 } from "@heroicons/react/24/solid";
+import Lottie from "lottie-react";
+import hapbirt from "../../assets/happy-birthday.json";
+import "./Team.css";
+import MessageHead from "../Message/MessageHead";
 
 const TeamWorking = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -20,6 +24,9 @@ const TeamWorking = () => {
     "/api/creativemember/getheadmember",
     fetcher
   );
+
+  let currentDate = new Date().toJSON().slice(5, 10);
+
 
   if (error) return <div>failed to load</div>;
   if (isLoading)
@@ -33,7 +40,7 @@ const TeamWorking = () => {
     );
 
   return (
-    <div className="pt-5 bg-stone-200">
+    <div className="pt-5 back">
       <section>
         <div className="mx-auto max-w-7xl px-2 lg:px-8">
           <div className="mb-4 max-w-lg">
@@ -112,6 +119,24 @@ const TeamWorking = () => {
                         </div>
                       )}
                     </div>
+                    {item.dob?.slice(5, 10) === currentDate ? (
+                      <div>
+                        <MessageHead item={item} />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+                  
+                  <div className="-mt-80 max-w-2xl">
+                    {item.dob?.slice(5, 10) === currentDate ? (
+                      <>
+                        <Lottie animationData={hapbirt} loop={true} />
+                      </>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </>

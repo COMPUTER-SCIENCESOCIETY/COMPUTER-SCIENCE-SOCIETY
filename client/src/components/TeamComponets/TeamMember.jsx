@@ -13,7 +13,7 @@ export default function TeamMember() {
   return (
     <div className="w-full px-2 py-9 mb-5 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-xl bg-amber-900/20 p-1">
+        <Tab.List className="flex space-x-1 rounded-xl bg-amber-400 p-1">
           <Tab
             className={({ selected }) =>
               classNames(

@@ -60,15 +60,15 @@ app.use(notFound);
 app.use(errorHandler);
 
 
-if (cluster.isPrimary) {
-  for (let i = 0; i <numCpu; i++) {
-    cluster.fork()
-  }
-  cluster.on('exit', () => {
-    cluster.fork()
-  })
-}else{
-  app.listen(port, () => console.log(`server is Running at ${process.pid} ${port}`));
-}
+// if (cluster.isPrimary) {
+//   for (let i = 0; i <numCpu; i++) {
+//     cluster.fork()
+//   }
+//   cluster.on('exit', () => {
+//     cluster.fork()
+//   })
+// }else{
+//   app.listen(port, () => console.log(`server is Running at ${process.pid} ${port}`));
+// }
 
-// app.listen(port, () => console.log(`server is Running at ${port}`));
+app.listen(port, () => console.log(`server is Running at ${port}`));
