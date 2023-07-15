@@ -1,7 +1,13 @@
 import React from "react";
 import logo from "../../assets/itsl.png";
-import './MainSlide.css'
+import "./MainSlide.css";
+import { useTranslation } from "react-i18next";
+
+
+
 const MainSlide = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="h-full relative">
@@ -21,10 +27,10 @@ const MainSlide = () => {
         </div>
         <div>
           <p className="text-3xl lg:text-5xl text-center text-white font-bold uppercase pb-10 tracking-in-expand">
-            Welcome to Information technology Society
+            {t("welcome")}
           </p>
           <p className="text-3xl lg:text-5xl text-center text-white font-bold pb-10">
-            Learn <sup>.</sup> Code <sup>.</sup> Play
+          {t("learn")} <sup>.</sup> {t("code")} <sup>.</sup> {t("play")}
           </p>
         </div>
       </div>

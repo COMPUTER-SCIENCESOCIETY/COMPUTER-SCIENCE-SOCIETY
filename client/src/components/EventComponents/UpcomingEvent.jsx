@@ -13,6 +13,7 @@ import TableEvent from "./TableEvent";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
+import OldEven from "./OldEven";
 
 const UpcomingEvent = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -122,8 +123,8 @@ const UpcomingEvent = () => {
         ) : (
           ""
         )}
-
         <TableEvent />
+        {/* <OldEven/> */}
       </div>
     </div>
   );

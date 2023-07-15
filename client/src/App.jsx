@@ -12,7 +12,8 @@ const App = () => {
     setLoading(true);
   }, 1000);
 
-  const [progress, setProgress] = useState(0)
+
+  console.log(`This WebSite is Created By Rishi Bose 🌞 ${'https://rishicv.vercel.app/'}`);
 
   return (
     <div>
