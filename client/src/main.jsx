@@ -19,6 +19,8 @@ import { HelmetProvider } from "react-helmet-async";
 import GalleryImage from "./components/GalleryComponent/GalleryImage.jsx";
 import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
+import './i18n.js'
+
 const router = createBrowserRouter(
   
    

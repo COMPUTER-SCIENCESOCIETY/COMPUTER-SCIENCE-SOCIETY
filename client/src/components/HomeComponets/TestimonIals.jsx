@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 // import required modules
 import { FreeMode, Autoplay } from "swiper";
 
-import Rating from '@mui/material/Rating';
+import Rating from "@mui/material/Rating";
 
 const TestimonIals = () => {
   const [Data, setData] = useState([]);
@@ -25,6 +25,7 @@ const TestimonIals = () => {
     getInfo();
   }, []);
 
+  console.log(Data[0]);
 
   return (
     <div className="bg-gradient-to-b from-indigo-500">
