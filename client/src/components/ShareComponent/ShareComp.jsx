@@ -23,7 +23,7 @@ export default function ShareComp() {
     setIsOpen(true);
   }
 
-  const shareUrl = "https://itsoffical.cyclic.app/";
+  const shareUrls = "https://itsoffical.cyclic.app";
 
   return (
     <>
@@ -68,16 +68,16 @@ export default function ShareComp() {
                   </Dialog.Title>
                   <div className="mt-2">
                     <div className="flex justify-start space-x-3">
-                      <FacebookShareButton url={shareUrl}>
+                      <FacebookShareButton url={shareUrls}>
                         <FacebookIcon className=" rounded-full" />
                       </FacebookShareButton>
-                      <TwitterShareButton url={shareUrl}>
+                      <TwitterShareButton url={shareUrls}>
                         <TwitterIcon className=" rounded-full" />
                       </TwitterShareButton>
-                      <LinkedinShareButton url={shareUrl}>
+                      <LinkedinShareButton url={shareUrls}>
                         <LinkedinIcon className=" rounded-full" />
                       </LinkedinShareButton>
-                      <WhatsappShareButton url={shareUrl}>
+                      <WhatsappShareButton url={shareUrls}>
                         <WhatsappIcon className=" rounded-full" />
                       </WhatsappShareButton>
                     </div>
