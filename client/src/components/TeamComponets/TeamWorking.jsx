@@ -14,6 +14,7 @@ import Lottie from "lottie-react";
 import hapbirt from "../../assets/happy-birthday.json";
 import "./Team.css";
 import MessageHead from "../Message/MessageHead";
+import ShareComp from "../ShareComponent/ShareComp";
 
 const TeamWorking = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -107,7 +108,8 @@ const TeamWorking = () => {
                   </div>
                   <div className="flex justify-around pt-5">
                     <div>
-                      <ShareIcon className="h-6 w-6 text-red-500 cursor-pointer" />
+                      <ShareComp/>
+                     
                     </div>
                     <div>
                       {userInfo ? (
