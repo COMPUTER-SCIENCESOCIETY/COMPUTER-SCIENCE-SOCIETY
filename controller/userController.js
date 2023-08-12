@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import { sendEmailRegister } from '../helper/sendMail.js'
+
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -13,6 +15,8 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
     });
+    const url = '123567'
+    sendEmailRegister(email, url, "Verify your Email")
   } else {
     res.status(400);
     throw new Error("Invalid Email or Password");
