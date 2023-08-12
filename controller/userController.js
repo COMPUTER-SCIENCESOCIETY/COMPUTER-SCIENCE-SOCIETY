@@ -15,7 +15,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
     });
-    const url = '123567'
+    const url = '12356745'
     sendEmailRegister(email, url, "Verify your Email")
   } else {
     res.status(400);
