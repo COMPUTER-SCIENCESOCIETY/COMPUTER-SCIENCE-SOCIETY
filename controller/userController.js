@@ -16,8 +16,8 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
     });
-    const url = "12345"
-    sendEmailRegister(email, url, "Verify your Email")
+    // const url = "12345"
+    // sendEmailRegister(email, url, "Verify your Email")
   } else {
     res.status(400);
     throw new Error("Invalid Email or Password");
