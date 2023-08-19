@@ -20,6 +20,7 @@ import GalleryImage from "./components/GalleryComponent/GalleryImage.jsx";
 import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
 import './i18n.js'
+import ForgotScreen from "./pages/Auth/ForgotScreen.jsx";
 
 const router = createBrowserRouter(
   
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path="/auth/login" element={<LoginScreen />} />
         <Route path="/events" element={<EventWorking />} />
         <Route path="/gallery" element={<GalleryImage />} />
+        <Route path="/forgot-reset" element={<ForgotScreen />} />
         <Route path="/*" element={<PageNotFound />} />
       </Route>
     </>

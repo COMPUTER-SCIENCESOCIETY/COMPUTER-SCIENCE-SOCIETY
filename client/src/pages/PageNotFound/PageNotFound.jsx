@@ -6,6 +6,14 @@ const PageNotFound = () => {
   return (
     <div className="flex h-screen text-center">
       <div className="m-auto">
+        <div className=" inline-flex">
+        <img
+            src="https://illustrations.popsy.co/pink/page-under-construction.svg"
+            alt="question-mark"
+            className="h-[300px] w-auto"
+          />
+        </div>
+      
         <p className="text-sm font-semibold text-black">404 error</p>
         <h1 className="mt-3 text-2xl font-semibold text-gray-800 md:text-3xl">
           We can&apos;t find that page

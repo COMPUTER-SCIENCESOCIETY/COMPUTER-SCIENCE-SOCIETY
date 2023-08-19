@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/itsl.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../slices/userApiSlice";
 import { setCredentials } from "../../slices/authSlices";
@@ -72,10 +72,10 @@ export function LoginScreen() {
                     {" "}
                     Password{" "}
                   </label>
-                  {/* <a href="#" title="" className="text-sm font-semibold text-black hover:underline">
+                  {/* <Link to='/forgot-reset' title="" className="text-sm font-semibold text-black hover:underline">
                     {' '}
                     Forgot password?{' '}
-                  </a> */}
+                  </Link> */}
                 </div>
                 <div className="mt-2">
                   <input

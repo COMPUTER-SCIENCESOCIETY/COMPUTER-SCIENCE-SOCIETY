@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
@@ -19,6 +18,8 @@
     "@reduxjs/toolkit": "^1.9.5",
     "aos": "^3.0.0-beta.6",
     "axios": "^1.4.0",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.5.0",
     "i18next": "^23.2.11",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",

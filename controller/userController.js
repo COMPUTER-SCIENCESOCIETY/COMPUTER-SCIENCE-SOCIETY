@@ -7,8 +7,8 @@ const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-  const url = "12345";
-    sendEmailRegister(email, url, "Verify your Email");
+  // const url = "12345";
+  //   sendEmailRegister(email, url, "Verify your Email");
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
     
