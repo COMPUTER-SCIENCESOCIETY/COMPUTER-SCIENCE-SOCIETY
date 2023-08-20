@@ -21,6 +21,7 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
 import './i18n.js'
 import ForgotScreen from "./pages/Auth/ForgotScreen.jsx";
+import PasswordReset from "./pages/Auth/PasswordReset.jsx";
 
 const router = createBrowserRouter(
   
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
         <Route path="/events" element={<EventWorking />} />
         <Route path="/gallery" element={<GalleryImage />} />
         <Route path="/forgot-reset" element={<ForgotScreen />} />
+        <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/*" element={<PageNotFound />} />
       </Route>
     </>

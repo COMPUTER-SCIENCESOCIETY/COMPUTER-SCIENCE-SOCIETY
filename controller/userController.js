@@ -11,7 +11,7 @@ const authUser = asyncHandler(async (req, res) => {
   //   sendEmailRegister(email, url, "Verify your Email");
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
-    
+
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -92,10 +92,68 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+const forgotPassword = asyncHandler(async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(500).json({ success: false, message: "Invalid Eamil" });
+    }
+
+    const url = Math.floor(Math.random() * 1000000);
+
+    user.resetPasswordOTP = url;
+    user.resetPasswordotp_expiry = Date.now() + 10 * 60 * 1000;
+
+    await user.save();
+
+    await sendEmailRegister(email, url, "Verify your Email");
+
+    res.status(200).json({ success: true, message: `Otp Send To ${email}` });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+const resetPassword = asyncHandler(async(req,res)=>{
+  try {
+
+    const { otp, newPassword } = req.body;
+
+    const user = await User.findOne({
+        resetPasswordOTP: otp,
+        resetPasswordotp_expiry: { $gt: Date.now() }
+    }).select("+password")
+
+    if (!user) {
+        res.status(200).json({ success: false, message: "Otp Expire" })
+    }
+
+    user.password = newPassword
+    user.resetPasswordOTP = null
+    user.resetPasswordotp_expiry = null
+
+    await user.save()
+
+
+    res.status(200).json({ success: true, message: "Password Updated" })
+} catch (error) {
+    res.status(500).json({
+        success: false,
+        message: error.message
+    })
+}
+})
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
+  forgotPassword,
+  resetPassword
 };
