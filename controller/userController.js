@@ -109,7 +109,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    await sendEmailRegister(email, url, "Verify your Email");
+    sendEmailRegister(email, url, "Verify your Email");
 
     res.status(200).json({ success: true, message: `Otp Send To ${email}` });
   } catch (error) {
