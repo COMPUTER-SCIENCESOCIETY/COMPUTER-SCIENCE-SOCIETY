@@ -103,13 +103,14 @@ const forgotPassword = asyncHandler(async (req, res) => {
     }
 
     const url = Math.floor(Math.random() * 1000000);
+    sendEmailRegister(email, url, "Verify your Email");
 
     user.resetPasswordOTP = url;
     user.resetPasswordotp_expiry = Date.now() + 10 * 60 * 1000;
 
     await user.save();
 
-    sendEmailRegister(email, url, "Verify your Email");
+   
 
     res.status(200).json({ success: true, message: `Otp Send To ${email}` });
   } catch (error) {
