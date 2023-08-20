@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isEmpty } from "../../helper/validate";
+import { usePasswordresetMutation } from "../../slices/userApiSlice";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../slices/authSlices";
 
 
 const initialState = {
@@ -10,34 +13,55 @@ const initialState = {
 
 
 const ForgotScreen = () => {
-  const navigate = useNavigate()
-  const [data, setData] = React.useState(initialState)
-  const { email } = data
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [passwordreset, { isLoading }] = usePasswordresetMutation();
+
+  // const { userInfo } = useSelector((state) => state.auth);
 
 
-  const handleChange = (e) => {
-      setData({ ...data,[e.target.name]: e.target.value });
-  }
 
-  const forgotpassword = async (e) => {
-      e.preventDefault()
-      //check field
-      if (isEmpty(email))
-          return alert("Please Fill in all fields")
-      if (!isEmail(email))
-      return alert("Please Enter a Valid Email Address")
-      try {
-          await axios.post("/api/users/forgotpassword", {
-              email
-          })
-          navigate('/reset-password')
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await passwordreset({ email }).unwrap();
+      dispatch(setCredentials({ ...res }));
+    } catch (error) {
+      console.log(error?.data?.message || error);
+    }
+  };
+
+  // const navigate = useNavigate()
+  // const [data, setData] = React.useState(initialState)
+  // const { email } = data
+
+
+  // const handleChange = (e) => {
+  //     setData({ ...data,[e.target.name]: e.target.value });
+  // }
+
+  // const forgotpassword = async (e) => {
+  //     e.preventDefault()
+  //     //check field
+  //     if (isEmpty(email))
+  //         return alert("Please Fill in all fields")
+  //     if (!isEmail(email))
+  //     return alert("Please Enter a Valid Email Address")
+  //     try {
+  //         await axios.post("/api/users/forgotpassword", {
+  //             email
+  //         })
+  //         navigate('/reset-password')
          
-          alert("Email sent")
+  //         alert("Email sent")
 
-      } catch (error) {
-          alert(error.response.data.message)
-      }
-  }
+  //     } catch (error) {
+  //         alert(error.response.data.message)
+  //     }
+  // }
 
   return (
     <div>
@@ -66,8 +90,8 @@ const ForgotScreen = () => {
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
                       placeholder="Email"
-                      name='email'
-                      onChange={handleChange}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     ></input>
                   </div>
                 </div>
@@ -75,7 +99,7 @@ const ForgotScreen = () => {
                 <div>
                   <button
                     type="button"
-                    onClick={forgotpassword}
+                    onClick={submitHandler}
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                   >
                     Get started
