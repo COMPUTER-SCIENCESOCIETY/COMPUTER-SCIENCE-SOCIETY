@@ -72,10 +72,10 @@ export function LoginScreen() {
                     {" "}
                     Password{" "}
                   </label>
-                  {/* <Link to='/forgot-reset' title="" className="text-sm font-semibold text-black hover:underline">
+                  <Link to='/forgot-reset' title="" className="text-sm font-semibold text-black hover:underline">
                     {' '}
                     Forgot password?{' '}
-                  </Link> */}
+                  </Link>
                 </div>
                 <div className="mt-2">
                   <input
