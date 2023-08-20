@@ -17,7 +17,6 @@ const PasswordReset = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  console.log(data);
   const resetppassword = async (e) => {
     e.preventDefault();
     //check field
