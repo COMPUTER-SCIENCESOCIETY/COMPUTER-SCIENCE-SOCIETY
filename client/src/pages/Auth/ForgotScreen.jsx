@@ -6,8 +6,6 @@ import { usePasswordresetMutation } from "../../slices/userApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredential, setCredentials } from "../../slices/authSlices";
 
-
-
 const ForgotScreen = () => {
   const [email, setEmail] = useState("");
 
@@ -18,14 +16,12 @@ const ForgotScreen = () => {
 
   // const { userInfo } = useSelector((state) => state.auth);
 
-
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await passwordreset({ email }).unwrap();
-      dispatch(setCredential({ ...res }));
-      navigate('/reset-password')
+      dispatch(...res);
+      // navigate('/reset-password')
     } catch (error) {
       console.log(error?.data?.message || error);
     }
@@ -34,7 +30,6 @@ const ForgotScreen = () => {
   // const navigate = useNavigate()
   // const [data, setData] = React.useState(initialState)
   // const { email } = data
-
 
   // const handleChange = (e) => {
   //     setData({ ...data,[e.target.name]: e.target.value });
@@ -52,7 +47,7 @@ const ForgotScreen = () => {
   //             email
   //         })
   //         navigate('/reset-password')
-         
+
   //         alert("Email sent")
 
   //     } catch (error) {
