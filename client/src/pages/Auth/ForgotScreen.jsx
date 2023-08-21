@@ -4,12 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { isEmail, isEmpty } from "../../helper/validate";
 import { usePasswordresetMutation } from "../../slices/userApiSlice";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../slices/authSlices";
+import { setCredential, setCredentials } from "../../slices/authSlices";
 
-
-const initialState = {
-  email: "",
-};
 
 
 const ForgotScreen = () => {
@@ -28,7 +24,8 @@ const ForgotScreen = () => {
     e.preventDefault();
     try {
       const res = await passwordreset({ email }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      dispatch(setCredential({ ...res }));
+      navigate('/reset-password')
     } catch (error) {
       console.log(error?.data?.message || error);
     }
