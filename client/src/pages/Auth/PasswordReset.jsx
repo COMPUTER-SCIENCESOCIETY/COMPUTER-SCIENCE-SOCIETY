@@ -9,6 +9,7 @@ const initialState = {
 };
 
 const PasswordReset = () => {
+  // window.location.reload();
   const navigate = useNavigate();
   const [data, setData] = useState(initialState);
   const { otp, newPassword } = data;
