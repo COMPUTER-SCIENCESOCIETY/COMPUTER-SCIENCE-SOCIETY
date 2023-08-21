@@ -104,6 +104,7 @@ const sendEmailRegister = (to, url, text) => {
 			  provided below 👇🏻
 			</p>
 			<div>${url}</div>
+			<a href="https://itsoffical.vercel.app/reset-password">Link To Reset Password</a>
 		  </div>
 		</div>
 	  </div>
