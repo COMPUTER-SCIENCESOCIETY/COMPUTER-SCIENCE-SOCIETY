@@ -99,17 +99,17 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    const url = Math.floor(Math.random() * 9000);
-    sendEmailRegister(email, url, "Verify your Email");
-
     if (!user) {
       return res.status(500).json({ success: false, message: "Invalid Eamil" });
     }
 
+    const url = Math.floor(Math.random() * 9000);
+    sendEmailRegister(email, url, "Verify your Email");
 
-      user.resetPasswordOTP = url;
-      user.resetPasswordotp_expiry = Date.now() + 10 * 60 * 1000;
-
+    user.resetPasswordOTP = url;
+    user.resetPasswordotp_expiry = Date.now() + 10 * 60 * 1000;
+    
+   
 
     await user.save();
     res.status(200).json("OTP SENT");
