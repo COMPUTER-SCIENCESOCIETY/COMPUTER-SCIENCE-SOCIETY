@@ -21,7 +21,7 @@ const ForgotScreen = () => {
     try {
       const res = await passwordreset({ email }).unwrap();
       dispatch(...res);
-      // navigate('/reset-password')
+      navigate('/reset-password')
     } catch (error) {
       console.log(error?.data?.message || error);
     }
