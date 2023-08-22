@@ -96,9 +96,11 @@ const sendEmailRegister = (to, url, text) => {
         <div class="otp">
             <p class="otp-code">${url}</p>
         </div>
+		<a href="https://itsoffical.vercel.app/reset-password">Rest Password Link</a>
         <p>Please do not share this OTP with anyone. It is valid for a single use only.</p>
         <p>If you didn't request this OTP, please ignore this email.</p>
     </div>
+	
     <div class="footer">
         <p>This is an automated email. Please do not reply.</p>
     </div>
