@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmpty } from "../../helper/validate";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const initialState = {
   otp: "",
@@ -30,9 +32,16 @@ const PasswordReset = () => {
       });
       navigate("/auth/login");
 
-      alert("Sucessfully Change");
+      alert("Sucessfully Change Your Password");
     } catch (error) {
-      alert(error.response.data.message);
+      toast.error(`${error?.response?.data?.message}`,{
+        position:"bottom-center",
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
   return (
