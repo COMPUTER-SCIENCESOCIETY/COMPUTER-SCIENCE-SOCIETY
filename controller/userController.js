@@ -128,9 +128,9 @@ const resetPassword = asyncHandler(async (req, res) => {
     }).select("+password");
 
     if (!user) {
-      res.status(200).json({ success: false, message: "Otp Expire" });
+      return res.status(404).json({ success: false, message: "Otp Expire" });
     }
-
+    
     user.password = newPassword;
     user.resetPasswordOTP = null;
     user.resetPasswordotp_expiry = null;

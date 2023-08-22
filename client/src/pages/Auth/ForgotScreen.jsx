@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isEmail, isEmpty } from "../../helper/validate";
+import toast, { Toaster } from 'react-hot-toast';
 import { usePasswordresetMutation } from "../../slices/userApiSlice";
 import { useDispatch } from "react-redux";
-import { setCredential, setCredentials } from "../../slices/authSlices";
+import { setCredential } from "../../slices/authSlices";
 
 const ForgotScreen = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +13,6 @@ const ForgotScreen = () => {
 
   const [passwordreset, { isLoading }] = usePasswordresetMutation();
 
-  // const { userInfo } = useSelector((state) => state.auth);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,40 +21,20 @@ const ForgotScreen = () => {
       dispatch(setCredential({ ...res }));
       navigate('/')
     } catch (error) {
-      console.log(error?.data?.message || error);
+      toast.error(`${error?.data?.message || error} ${email}`,{
+        position:"bottom-center",
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 
-  // const navigate = useNavigate()
-  // const [data, setData] = React.useState(initialState)
-  // const { email } = data
-
-  // const handleChange = (e) => {
-  //     setData({ ...data,[e.target.name]: e.target.value });
-  // }
-
-  // const forgotpassword = async (e) => {
-  //     e.preventDefault()
-  //     //check field
-  //     if (isEmpty(email))
-  //         return alert("Please Fill in all fields")
-  //     if (!isEmail(email))
-  //     return alert("Please Enter a Valid Email Address")
-  //     try {
-  //         await axios.post("/api/users/forgotpassword", {
-  //             email
-  //         })
-  //         navigate('/reset-password')
-
-  //         alert("Email sent")
-
-  //     } catch (error) {
-  //         alert(error.response.data.message)
-  //     }
-  // }
-
   return (
     <div>
+       <Toaster />
       <section>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
