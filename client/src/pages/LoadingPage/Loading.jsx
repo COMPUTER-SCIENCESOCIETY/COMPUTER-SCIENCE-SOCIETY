@@ -7,7 +7,7 @@ const Loading = () => {
       <div class="m-auto">
         <img src={logo} alt="loading.." className="w-96 h-96" />
         <p className=" capitalize font-bold text-xl text-center">
-          information technology society
+        COMPUTER SCIENCE SOCIETY
         </p>
         <div className="flex justify-center">
           <FidgetSpinner

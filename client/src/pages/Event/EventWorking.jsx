@@ -6,11 +6,9 @@ const EventWorking = () => {
   return (
     <div>
       <Helmet prioritizeSeoTags>
-        <title>ITS Events</title>
-        <link rel="notImportant" href="https://www.chipotle.com" />
+        <title>CSS Events</title>
         <meta name="whatever" value="notImportant" />
-        <link rel="canonical" href="https://www.tacobell.com" />
-        <meta property="og:title" content="Information technology Society Home Page" />
+        <meta property="og:title" content="CSS Events Page" />
       </Helmet>
         <EventGo/>
     </div>
