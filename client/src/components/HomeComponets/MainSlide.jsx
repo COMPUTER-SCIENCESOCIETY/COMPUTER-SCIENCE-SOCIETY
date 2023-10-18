@@ -29,9 +29,9 @@ const MainSlide = () => {
           <p className="text-3xl lg:text-5xl text-center text-white font-bold uppercase pb-10 tracking-in-expand">
             {t("welcome")}
           </p>
-          <p className="text-3xl lg:text-5xl text-center text-white font-bold pb-10">
+          {/* <p className="text-3xl lg:text-5xl text-center text-white font-bold pb-10">
           {t("learn")} <sup>.</sup> {t("code")} <sup>.</sup> {t("play")}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

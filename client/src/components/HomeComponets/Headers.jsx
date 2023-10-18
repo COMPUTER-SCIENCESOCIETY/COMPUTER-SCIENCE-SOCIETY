@@ -62,13 +62,13 @@ const Headers = () => {
             
           </Link>
 
-          <Link
+          {/* <Link
             className="flex justify-center items-center space-x-3 m-3"
             to="/teams"
           >
             <MdEmojiPeople className="h-6 w-6 cursor-pointer text-white" />
             
-          </Link>
+          </Link> */}
 
           <Link
             to="/gallery"

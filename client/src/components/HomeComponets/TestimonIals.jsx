@@ -36,7 +36,7 @@ const TestimonIals = () => {
           </h1>
         </div>
         <div className="mx-4">
-          <Swiper
+          {/* <Swiper
             spaceBetween={10}
             freeMode={true}
             modules={[FreeMode, Autoplay]}
@@ -109,7 +109,7 @@ const TestimonIals = () => {
                 </SwiperSlide>
               );
             })}
-          </Swiper>
+          </Swiper> */}
         </div>
       </div>
     </div>
