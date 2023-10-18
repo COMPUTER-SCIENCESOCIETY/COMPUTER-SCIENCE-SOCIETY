@@ -15,13 +15,13 @@ const Home = () => {
     <div className="mb-10">
       
       <Helmet prioritizeSeoTags>
-        <title>Information technology Society</title>
+        <title>COMPUTER SCIENCE SOCIETY</title>
         <link rel="notImportant" href="https://itsoffical.cyclic.app" />
         <meta name="whatever" value="notImportant" />
         <link rel="canonical" href="https://itsoffical.cyclic.app" />
         <meta
           property="og:title"
-          content="Information technology Society Home Page"
+          content="COMPUTER SCIENCE SOCIETY Home Page"
         />
       </Helmet>
       <MainSlide />

@@ -16,7 +16,7 @@ const FooterSticky = () => {
                 <div className="inline-flex items-center">
                   <img className="h-8 w-auto" src={logo} alt="Logo" />
                   <span className="ml-4 text-lg font-bold">
-                    Information technology Society
+                  COMPUTER SCIENCE SOCIETY
                   </span>
                 </div>
               </a>

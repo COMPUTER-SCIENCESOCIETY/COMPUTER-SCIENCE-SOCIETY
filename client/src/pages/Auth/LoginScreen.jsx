@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../slices/userApiSlice";
 import { setCredentials } from "../../slices/authSlices";
+import { Helmet } from "react-helmet-async";
 
 export function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -34,6 +35,11 @@ export function LoginScreen() {
   };
   return (
     <section>
+       <Helmet prioritizeSeoTags>
+        <title>CSS Offical</title>
+        <meta name="whatever" value="notImportant" />
+        <meta property="og:title" content="CSS Events Page" />
+      </Helmet>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
           <div className="mb-2 flex justify-center">
